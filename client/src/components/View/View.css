@@ -1,0 +1,40 @@
+#main-view {
+	border: 1px solid blue;
+	padding: 20px;
+	margin-right: 100px;
+	height: 900px;
+	background: white;
+}
+
+.view-header {
+	text-align: center;
+	font-size: 50px;
+	border: 1px solid green;
+}
+
+.link-block {
+	padding: 20px;
+	border: 1px solid orange;
+	height: 300px;
+	width: 300px;
+	margin-top: 40px;
+	margin-left: 50px;
+}
+
+.url-image {
+	width: 200px;
+	height: 200px;
+	border: 1px solid purple;
+	display: block;
+	margin: auto;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.url-link-block {
+	width: 200px;
+	border: 1px solid red;
+	text-align: center;
+	margin: auto;
+}
