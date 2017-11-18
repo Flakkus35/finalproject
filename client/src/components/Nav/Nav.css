@@ -16,7 +16,7 @@
 	background: white;
 }
 
-#login-btn {
+#login-btn, #user-btn {
 	margin-top: 7px;
 	margin-right: 10px;
 	margin-left: 10px;
@@ -30,4 +30,16 @@
 	width: 25px;
 	margin-left: 10px;
 	margin-right: 10px;
+}
+
+#login-modal {
+	z-index: 2000;
+}
+
+.modal-backdrop {
+	z-index: 10;
+}
+
+#signup-btn {
+	float: left;
 }

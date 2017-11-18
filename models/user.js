@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-	local: { username: String, password: String },
+	username: {
+		type: String,
+		unique: true
+	},
+	password: String,
 	// Add keys to settings when a new setting is developed
 	// settings: {}
 	links: [{ 
