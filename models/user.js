@@ -9,6 +9,7 @@ const userSchema = new Schema({
 	password: String,
 	// Add keys to settings when a new setting is developed
 	// settings: {}
+	cat: Array,
 	links: [{ 
 		url: String, 
 		cat: {

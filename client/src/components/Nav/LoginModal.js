@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Nav.css";
+import API from "../../util/API";
 
 class LoginModal extends Component {
 	state = {
@@ -17,7 +18,17 @@ class LoginModal extends Component {
 	handleFormSubmit = event => {
 		event.preventDefault();
 		if (this.state.usernameInput && this.state.passwordInput) {
-
+			API.loginUser({
+				username: this.state.usernameInput,
+				password: this.state.passwordInput
+			})
+			.then(res => {
+				console.log(res);
+				document.cookie = `username=${res.data.username}; path=/`;
+				document.cookie = `key=${res.data._id}; path=/`;
+				this.props.update();
+			})
+			.catch(err => console.log(err));
 		} else {
 			alert(`Please enter both a username and password`);
 			this.setState({

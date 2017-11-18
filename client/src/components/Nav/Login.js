@@ -8,6 +8,14 @@ class Login extends Component {
 		username: this.props.user
 	};
 
+	componentWillReceiveProps(nextProps) {
+		if (this.state.username !== nextProps.user) {
+			this.setState({
+				username: nextProps.user
+			});
+		}
+	}
+
 	render() {
 		return (
 			<div>	
@@ -16,6 +24,7 @@ class Login extends Component {
 						?	<button
 								className="btn"
 								id="user-btn"
+								onClick={this.props.logout}
 							>
 							{this.state.username}
 							</button>

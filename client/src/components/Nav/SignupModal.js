@@ -28,15 +28,11 @@ class SignupModal extends Component {
 					console.log(JSON.stringify(test));
 					console.log(res);
 					document.cookie = `username=${res.data.username}; path=/`;
+					document.cookie = `key=${res.data._id}; path=/`;
+					this.props.update();
 
 				})
 				.catch(err => console.log(err));
-				// dbCall.createUser({
-				// 	username: this.state.signupUser,
-				// 	password: this.state.confirmPassword
-				// })
-				// .then(res => console.log(res))
-				// .catch(err => console.log(err));
 			} else {
 				return alert(`Passwords do not match`);
 				this.setState({

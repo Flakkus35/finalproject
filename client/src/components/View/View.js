@@ -10,6 +10,15 @@ class View extends Component {
 		linksBot: []
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (this.props.user !== nextProps.user) {
+			// console.log(`old: ${this.props.user}, new: ${nextProps.user}`);
+			this.setState({
+				name: nextProps.user
+			});
+		}
+	}
+
 	render() {
 		return (
 			<div id="main-view">
