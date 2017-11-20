@@ -78,6 +78,7 @@ class SignupModal extends Component {
 									<label htmlFor="signupPassword">Password</label>
 									<input 
 										className="form-control" 
+										type="password"
 										id="signupPassword" 
 										placeholder="Enter your password"
 										value={this.state.signupPassword}
@@ -88,6 +89,7 @@ class SignupModal extends Component {
 									<label htmlFor="confirmPassword">Re-enter password</label>
 									<input 
 										className="form-control" 
+										type="password"
 										id="confirmPassword" 
 										placeholder="Re-enter password"
 										value={this.state.confirmPassword}

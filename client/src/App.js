@@ -18,6 +18,7 @@ class App extends Component {
             page: "",
             urlArray: [],
             urlKeyArray: [],
+            catArray: [],
             count: 0
         }
     }
@@ -28,6 +29,7 @@ class App extends Component {
         if (temp) {
             this.updateUser();
         }
+        console.log(this.state.catArray);
     }
 
     // Grab all urls from logged in user
@@ -38,9 +40,11 @@ class App extends Component {
         })
         .then(res => {
             console.log(res);
-            var tempUrlArr = [];
-            var tempUrlKeyArr = [];
-            var tempCount = 0;
+            let tempUrlArr = [];
+            let tempUrlKeyArr = [];
+            let tempCatArr = ["Home"];
+            let tempCount = 0;
+            console.log(res.data);
             for (var i = 0; i < res.data.links.length; i++) {
                 if (this.state.page === "Settings") {
                     tempUrlArr.push(res.data.links[i].url);
@@ -53,12 +57,19 @@ class App extends Component {
                     tempCount++;
                 }
             }
+            for (var i = 0; i < res.data.cat.length; i ++) {
+                tempCatArr.push(res.data.cat[i]);
+            }
             this.setState({
                 urlArray: tempUrlArr,
                 urlKeyArray: tempUrlKeyArr,
+                catArray: tempCatArr,
                 count: tempCount
             },
-            () => console.log(this.state.urlArray));
+            () => {
+                console.log(this.state.urlArray);
+                console.log(this.state.catArray);
+            });
         })
         .catch(err => console.log(err));
     }
@@ -105,7 +116,8 @@ class App extends Component {
         document.cookie = "key=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
         this.setState({
             user: "",
-            key: ""
+            key: "",
+            page: "Home"
         });
     }
 
@@ -138,7 +150,10 @@ class App extends Component {
                 			<Sidebar 
                 				module1="Categories"
                 				module2="Social"
-                                goto={this.goToSettings.bind(this)}
+                                settings={this.goToSettings.bind(this)}
+                                cats={this.state.catArray}
+                                name={this.state.page}
+                                gohome={this.goToHome.bind(this)}
                 			/>
                 		</Col>
                 		<Col size="md-10">

@@ -65,7 +65,8 @@ class LoginModal extends Component {
 								<div className="form-group">
 									<label htmlFor="passwordInput">Password</label>
 									<input 
-										className="form-control" 
+										className="form-control"
+										type="password" 
 										id="passwordInput" 
 										placeholder="Enter your password"
 										value={this.state.passwordInput}

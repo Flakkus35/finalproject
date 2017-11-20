@@ -23,10 +23,10 @@ class Settings extends Component {
 		if (this.state.urlInput) {
 			console.log(this.state.userKey);
 			console.log(this.state.urlOption);
-			console.log(this.state.urlInput);
+			const tempUrl = ("http://" + this.state.urlInput);
 			API.addUrl({
 				_id: this.state.userKey,
-				url: this.state.urlInput,
+				url: tempUrl,
 				cat: this.state.urlOption
 			})
 			.then(res => this.props.update())
@@ -40,43 +40,45 @@ class Settings extends Component {
 		return (
 			<div className="card">
 				<div className="card-body">
-					<h4 className="setting-title">Add New Link</h4>
-					<Row>
-						<form className="form-group">
-							<Col size="md-1">
-								<label htmlFor="url-input" id="url-tag" className="form-control">Url:</label>
-							</Col>
-							<Col size="md-6">
-								<input 
-									type="text" 
-									className="form-control" 
-									id="urlInput"
-									value={this.state.urlInput}
-									onChange={this.handleInputChange} 
-								/>
-							</Col>
-							<Col size="md-2">
-								<select className="form-control">
-									<option 
-										value={this.state.urlOption}
-										onChange={this.handleInputChange}
-										id="urlOption"
+					<div id="add-url">	
+						<h4 className="setting-title">Add New Link</h4>
+						<Row>
+							<form className="form-group">
+								<Col size="md-1">
+									<label htmlFor="url-input" id="url-tag" className="form-control">http://</label>
+								</Col>
+								<Col size="md-6">
+									<input 
+										type="text" 
+										className="form-control" 
+										id="urlInput"
+										value={this.state.urlInput}
+										onChange={this.handleInputChange} 
+									/>
+								</Col>
+								<Col size="md-2">
+									<select className="form-control">
+										<option 
+											value={this.state.urlOption}
+											onChange={this.handleInputChange}
+											id="urlOption"
+										>
+										Home
+										</option>
+									</select>
+								</Col>
+								<Col size="md-2">
+									<button 
+										type="button"
+										className="btn btn-primary"
+										onClick={this.handleFormSubmit}
 									>
-									Home
-									</option>
-								</select>
-							</Col>
-							<Col size="md-2">
-								<button 
-									type="button"
-									className="btn btn-primary"
-									onClick={this.handleFormSubmit}
-								>
-								Add
-								</button>
-							</Col>
-						</form>
-					</Row>
+									Add
+									</button>
+								</Col>
+							</form>
+						</Row>
+					</div>
 					<Row>
 						<Col size="md-12">
 							<div className="card" id="settings-list">

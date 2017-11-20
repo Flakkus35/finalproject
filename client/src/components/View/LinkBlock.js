@@ -1,7 +1,7 @@
 import React from "react";
 import { Col } from "../Grid";
 
-export const LinkBlock = (props) =>
+export const LinkBlock = props =>
 	<div>		
 		<Col size="md-3">
 			<div className="link-block">
@@ -9,7 +9,7 @@ export const LinkBlock = (props) =>
 					<img className="url-image" alt={props.urlname} />
 				</div>
 				<div className="url-link-block">
-					<a>{props.urlname}</a>
+					<a href={props.urlname}>{props.urlname}</a>
 				</div>
 			</div>
 		</Col>

@@ -8,15 +8,42 @@ class Sidebar extends Component {
 		return (
 			<div id="sidebar">
 				<div className="sidebar-link">
-					<Catlist name={this.props.module1}/>
-					<Catlist name={this.props.module2}/>
-					<button
+					<div className="card" id="group-card">
+						<div className="card-header">
+							Groups
+						</div>
+						<ul className="list-group list-group-flush">
+							{this.props.cats.map(cat => (
+								<Catlist 
+									group={cat} 
+									key={cat + "=key"}
+									goto={this.props.gohome}
+								/>
+							))}
+						</ul>
+					</div>
+					<div className="card" id="group-card">
+						<div className="card-header">
+							Social
+						</div>
+						<ul className="list-group list-group-flush">
+							<li className="list-group-item">
+								<a id="facebook-link" href="http://facebook.com">Facebook</a>
+							</li>
+							<li className="list-group-item">
+								<a id="twitter-link" href="http://twitter.com">Twitter</a>
+							</li>
+							<li className="list-group-item">
+								<a id="google-link" href="http://google.com">Google</a>
+							</li>
+						</ul>
+					</div>
+					<a
 						id="setting-link"
-						className="btn"
-						onClick={this.props.goto}
+						onClick={this.props.settings}
 					>
 					Settings
-					</button>
+					</a>
 				</div>
 			</div>
 		);
