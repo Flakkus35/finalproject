@@ -6,10 +6,10 @@ export const LinkBlock = (props) =>
 		<Col size="md-3">
 			<div className="link-block">
 				<div>
-					<img className="url-image" alt={props.name} />
+					<img className="url-image" alt={props.urlname} />
 				</div>
 				<div className="url-link-block">
-					<a>{props.url}</a>
+					<a>{props.urlname}</a>
 				</div>
 			</div>
 		</Col>

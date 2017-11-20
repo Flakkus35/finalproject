@@ -29,7 +29,11 @@ module.exports = {
 
 	},
 	pushNewUrl: function(req, res) {
-
+		console.log(req.body);
+		db.User
+			.findByIdAndUpdate(req.body._id, {$push: { "links": { "url": req.body.url, "cat": req.body.cat}}}, {new: true})
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.json(err));
 	},
 	deleteCat: function(req, res) {
 
@@ -39,5 +43,12 @@ module.exports = {
 	},
 	removeFromCat: function(req, res) {
 		
+	},
+	findUrls: function(req, res) {
+		console.log(req.body);
+		db.User
+			.findById(req.body._id)
+			.then(dbUser => res.json(dbUser))
+			.catch(err => res.json(err));
 	}
 }

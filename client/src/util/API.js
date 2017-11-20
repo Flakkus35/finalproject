@@ -12,5 +12,15 @@ export default {
 			username: loginData.username,
 			password: loginData.password
 		});
+	},
+	addUrl: function(urlData) {
+		console.log('before axios add url');
+		console.log(urlData)
+		return axios.put("/api/user/addurl", urlData);
+	},
+	findUrls: function(urlData) {
+		console.log('before axios find urls');
+		console.log(urlData);
+		return axios.put("/api/user/find", urlData);
 	}
 }

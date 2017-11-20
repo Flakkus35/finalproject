@@ -21,8 +21,12 @@ class Nav extends Component {
       <nav className="navbar navbar-inverse navbar-top">
       	<div className="container-fluid">
           	<div className="navbar-header">
-          		<a href="/" id="title" className="navbar-brand">
-            			Working Title
+          		<a 
+                id="title" 
+                className="navbar-brand"
+                onClick={this.props.home}
+              >
+            		Working Title
           		</a>
         		</div>
         		<div className="collapse navbar-collapse" id="navbarNavAltMarkup">

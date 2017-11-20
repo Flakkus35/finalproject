@@ -86,6 +86,8 @@ class LoginModal extends Component {
 							<button 
 								className="btn btn-primary"
 								onClick={this.handleFormSubmit}
+								data-toggle="modal"
+								data-target="#login-modal"
 							>
 							Submit
 							</button>

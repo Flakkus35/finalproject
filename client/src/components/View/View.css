@@ -42,3 +42,10 @@
 #show-none {
 	text-align: center;
 }
+
+#url-tag {
+	text-align: right;
+	border: none;
+	font-weight: bold;
+	font-size: 20px;
+}

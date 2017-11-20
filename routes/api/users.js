@@ -7,4 +7,10 @@ router.route("/create")
 router.route("/login")
 	.put(dbControl.findUser);
 
+router.route("/addurl")
+	.put(dbControl.pushNewUrl);
+
+router.route("/find")
+	.put(dbControl.findUrls);
+
 module.exports = router;
