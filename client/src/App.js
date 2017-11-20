@@ -48,7 +48,7 @@ class App extends Component {
             for (var i = 0; i < res.data.links.length; i++) {
                 if (this.state.page === "Settings") {
                     tempUrlArr.push(res.data.links[i].url);
-                    // tempUrlKeyArr.push(res.data.links[i]._id);
+                    tempUrlKeyArr.push(res.data.links[i]._id);
                     tempCount++;
                 }
                 if (res.data.links[i].cat === this.state.page) {
@@ -57,8 +57,8 @@ class App extends Component {
                     tempCount++;
                 }
             }
-            for (var i = 0; i < res.data.cat.length; i ++) {
-                tempCatArr.push(res.data.cat[i]);
+            for (var j = 0; j < res.data.cat.length; j++) {
+                tempCatArr.push(res.data.cat[j]);
             }
             this.setState({
                 urlArray: tempUrlArr,

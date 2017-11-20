@@ -8,7 +8,17 @@ class Settings extends Component {
 	state = {
 		urlInput: "",
 		userKey: this.props.user,
-		urlOption: "Home"
+		urlOption: "Home",
+		urlArray: this.props.urlkeys
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.urlkeys !== nextProps.urlkeys) {
+			this.setState({
+				urlArray: nextProps.urlkeys
+			},
+			() => console.log(this.state.urlkeys));
+		}
 	}
 
 	handleInputChange = event => {
@@ -90,8 +100,8 @@ class Settings extends Component {
 										{this.props.urls.map((url, index) => (
 											<SettingsList 
 												url={url} 
-												key={url + "=key"} 
-												urlkeys={this.props.urlkeys[index]}
+												key={url + "=urlkey"} 
+												urlkey={this.state.urlArray[index]}
 												userkey={this.props.user}
 												update={this.props.update} 
 											/>

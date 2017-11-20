@@ -4,8 +4,17 @@ import "./View.css";
 
 class SettingsList extends Component {
 	state = {
-		delUrlKey: ""
+		delUrlKey: "",
+		url: this.props.urlkey
 	};
+
+	componentWillReceiveProps(nextProps) {
+		if (this.state.url !== nextProps.urlkey) {
+			this.setState({
+				url: nextProps.urlkey
+			});
+		}
+	}
 
 	handleFormSubmit = event => {
 		event.preventDefault();
@@ -31,7 +40,7 @@ class SettingsList extends Component {
 			<li className="list-group-item d-flex justify-content-between align-items-center">
 				{this.props.url}
 				<button 
-					urlkey={this.props.urlkeys} 
+					urlkey={this.state.url} 
 					className="btn btn-danger remove-url" 
 					type="button"
 					onClick={this.handleFormSubmit}
