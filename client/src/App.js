@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
 import "./App.css";
 import { Container, Row, Col } from "./components/Grid";
@@ -17,6 +17,7 @@ class App extends Component {
             key: "",
             page: "",
             urlArray: [],
+            urlKeyArray: [],
             count: 0
         }
     }
@@ -37,16 +38,24 @@ class App extends Component {
         })
         .then(res => {
             console.log(res);
-            var tempArr = [];
+            var tempUrlArr = [];
+            var tempUrlKeyArr = [];
             var tempCount = 0;
             for (var i = 0; i < res.data.links.length; i++) {
+                if (this.state.page === "Settings") {
+                    tempUrlArr.push(res.data.links[i].url);
+                    // tempUrlKeyArr.push(res.data.links[i]._id);
+                    tempCount++;
+                }
                 if (res.data.links[i].cat === this.state.page) {
-                    tempArr.push(res.data.links[i].url);
+                    tempUrlArr.push(res.data.links[i].url);
+                    tempUrlKeyArr.push(res.data.links[i]._id);
                     tempCount++;
                 }
             }
             this.setState({
-                urlArray: tempArr,
+                urlArray: tempUrlArr,
+                urlKeyArray: tempUrlKeyArr,
                 count: tempCount
             },
             () => console.log(this.state.urlArray));
@@ -80,10 +89,10 @@ class App extends Component {
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
             var c = ca[i];
-            while (c.charAt(0) == ' ') {
+            while (c.charAt(0) === ' ') {
                 c = c.substring(1);
             }
-            if (c.indexOf(name) == 0) {
+            if (c.indexOf(name) === 0) {
                 return c.substring(name.length, c.length);
             }
         }
@@ -138,7 +147,9 @@ class App extends Component {
                                         view={this.state.page} 
                                         userkey={this.state.key} 
                                         urls={this.state.urlArray} 
-                                        count={this.state.count} 
+                                        count={this.state.count}
+                                        update={this.loadUrls.bind(this)}
+                                        urlkeys={this.state.urlKeyArray}
                                      />
                                 :    <View view="" />
                             }

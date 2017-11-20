@@ -13,4 +13,7 @@ router.route("/addurl")
 router.route("/find")
 	.put(dbControl.findUrls);
 
+router.route("/delete")
+	.put(dbControl.removeUrl);
+
 module.exports = router;

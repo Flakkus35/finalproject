@@ -47,7 +47,12 @@ class View extends Component {
 			);
 		} else if (this.state.page === "Settings") {
 			return (
-				<Settings user={this.props.userkey} />
+				<Settings 
+					user={this.props.userkey} 
+					urls={this.props.urls} 
+					update={this.props.update}
+					urlkeys={this.props.urlkeys}
+				/>
 			);
 		} else if (this.state.page === "Custom") {
 			return (
@@ -83,7 +88,7 @@ class View extends Component {
 				<Container fluid>
 					<Row>
 						<Col size="md-12">
-							<div className="card-header" className="view-header">
+							<div className="card-header view-header">
 								{this.viewHeader()}
 							</div>
 						</Col>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Col, Row } from "../Grid";
+import SettingsList from "./SettingsList";
 import "./View.css";
 import API from "../../util/API";
 
@@ -28,7 +29,7 @@ class Settings extends Component {
 				url: this.state.urlInput,
 				cat: this.state.urlOption
 			})
-			.then(res => console.log(res))
+			.then(res => this.props.update())
 			.catch(err => console.log(err));
 		} else {
 			return alert("Enter a link to add first!");
@@ -78,7 +79,24 @@ class Settings extends Component {
 					</Row>
 					<Row>
 						<Col size="md-12">
-							
+							<div className="card" id="settings-list">
+								<div id="inner-settings-list">
+									<div className="card-body">
+										<h4>Site List</h4>
+									</div>
+									<ul className="list-group">
+										{this.props.urls.map((url, index) => (
+											<SettingsList 
+												url={url} 
+												key={url + "=key"} 
+												urlkeys={this.props.urlkeys[index]}
+												userkey={this.props.user}
+												update={this.props.update} 
+											/>
+										))}
+									</ul>
+								</div>
+							</div>	
 						</Col>
 					</Row>		
 				</div>

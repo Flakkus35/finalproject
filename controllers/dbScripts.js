@@ -50,5 +50,12 @@ module.exports = {
 			.findById(req.body._id)
 			.then(dbUser => res.json(dbUser))
 			.catch(err => res.json(err));
+	},
+	removeUrl: function(req, res) {
+		console.log(req.body);
+		db.User
+			.findByIdAndUpdate(req.body.user_id, {$pull: { "links": { "_id": req.body.url_id }}}, {new: true})
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.json(err));
 	}
 }
