@@ -52,6 +52,8 @@ class View extends Component {
 					urls={this.props.urls} 
 					update={this.props.update}
 					urlkeys={this.props.urlkeys}
+					cats={this.props.cats}
+					urlcats={this.props.urlcats}
 				/>
 			);
 		} else if (this.state.page === "Custom") {

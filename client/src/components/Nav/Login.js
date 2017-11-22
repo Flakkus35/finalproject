@@ -21,13 +21,22 @@ class Login extends Component {
 			<div>	
 				<div className="navbar-nav login-panel">
 					{ this.state.username 
-						?	<button
-								className="btn"
-								id="user-btn"
-								onClick={this.props.logout}
-							>
-							{this.state.username}
-							</button>
+						?	<div className="card" id="profile-card">
+								<div className="card-header" id="user-welcome">
+									Hello {this.state.username}
+								</div>
+								<div className="card-body">
+									<a id="profile-link">
+										Profile
+									</a>
+									<a 
+										id="logout-link"
+										onClick={this.props.logout}
+									>
+										Logout
+									</a>
+								</div>
+							</div>
 						:	<button 
 								className="btn btn-primary" 
 								id="login-btn"

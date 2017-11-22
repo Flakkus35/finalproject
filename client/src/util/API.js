@@ -27,5 +27,13 @@ export default {
 		console.log('before axios remove url');
 		console.log(urlKey);
 		return axios.put("/api/user/delete", urlKey);
+	},
+	addCat: function(catData) {
+		console.log(catData);
+		return axios.post("/api/user/addcat", catData);
+	},
+	removeCat: function(catData) {
+		console.log(catData);
+		return axios.put("/api/user/remcat", catData);
 	}
 }

@@ -30,6 +30,7 @@
 	width: 25px;
 	margin-left: 10px;
 	margin-right: 10px;
+	margin-top: 20px;
 }
 
 #login-modal {
@@ -42,4 +43,25 @@
 
 #signup-btn {
 	float: left;
+}
+
+#profile-card {
+	float: left;
+	border: 1px solid red;
+	text-align: center;
+	width: 200px;
+}
+
+#profile-link {
+	margin: 5px;
+	float: left;
+}
+
+#logout-link {
+	margin: 5px;
+	float: right;
+}
+
+#user-welcome {
+	background: #f5f5f5;
 }

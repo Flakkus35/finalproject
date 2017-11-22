@@ -10,10 +10,16 @@ router.route("/login")
 router.route("/addurl")
 	.put(dbControl.pushNewUrl);
 
+router.route("/addcat")
+	.post(dbControl.addNewCat);
+
 router.route("/find")
 	.put(dbControl.findUrls);
 
 router.route("/delete")
 	.put(dbControl.removeUrl);
+
+router.route("/remcat")
+	.put(dbControl.deleteCat);
 
 module.exports = router;

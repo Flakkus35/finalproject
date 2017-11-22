@@ -7,9 +7,13 @@ import API from "../../util/API";
 class Settings extends Component {
 	state = {
 		urlInput: "",
+		catInput: "",
 		userKey: this.props.user,
 		urlOption: "Home",
-		urlArray: this.props.urlkeys
+		urlArray: this.props.urlkeys,
+		catArray: this.props.cats,
+		urlCatArray: this.props.urlcats,
+		catChoice: "Home"
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -17,7 +21,19 @@ class Settings extends Component {
 			this.setState({
 				urlArray: nextProps.urlkeys
 			},
-			() => console.log(this.state.urlkeys));
+			() => console.log(this.state.urlArray));
+		}
+		if (this.props.cats !== nextProps.cats) {
+			this.setState({
+				catArray: nextProps.cats
+			},
+			() => console.log(this.state.catArray));
+		}
+		if (this.props.urlcats !== nextProps.urlcats) {
+			this.setState({
+				urlCatArray: nextProps.urlcats
+			},
+			() => console.log(this.state.urlCatArray));
 		}
 	}
 
@@ -46,6 +62,30 @@ class Settings extends Component {
 		}
 	}
 
+	handleCatSubmit = event => {
+		event.preventDefault();
+		if (this.state.catInput) {
+			API.addCat({
+				_id: this.state.userKey,
+				cat: this.state.catInput
+			})
+			.then(res => this.props.update())
+			.catch(err => console.log(err));
+		} else {
+			return alert("Enter a new category first!");
+		}
+	}
+
+	switchCat = event => {
+		console.log(event.target.value);
+		if (this.state.catChoice !== event.target.value) {
+			this.setState({
+				catChoice: event.target.value
+			},
+			() => console.log(this.state.catChoice));
+		}
+	}
+
 	render() {
 		return (
 			<div className="card">
@@ -67,14 +107,15 @@ class Settings extends Component {
 									/>
 								</Col>
 								<Col size="md-2">
-									<select className="form-control">
-										<option 
-											value={this.state.urlOption}
-											onChange={this.handleInputChange}
-											id="urlOption"
-										>
-										Home
-										</option>
+									<select className="form-control" onChange={this.switchCat}>
+										{this.state.catArray.map(cat => (
+											<option 
+												key={cat + '=dropdownkey'}
+												value={cat}
+											>
+												{cat}
+											</option>
+										))}
 									</select>
 								</Col>
 								<Col size="md-2">
@@ -99,9 +140,58 @@ class Settings extends Component {
 									<ul className="list-group">
 										{this.props.urls.map((url, index) => (
 											<SettingsList 
+												name="urlList"
+												cat={this.state.urlCatArray[index]}
 												url={url} 
 												key={url + "=urlkey"} 
 												urlkey={this.state.urlArray[index]}
+												userkey={this.props.user}
+												update={this.props.update} 
+											/>
+										))}
+									</ul>
+								</div>
+							</div>	
+						</Col>
+					</Row>
+					<div id="add-cat">	
+						<h4 className="setting-title">Add New Category</h4>
+						<Row>
+							<form className="form-group">
+								<Col size="md-3">
+									<input 
+										type="text" 
+										className="form-control" 
+										id="catInput"
+										value={this.state.catInput}
+										onChange={this.handleInputChange}
+									/>
+								</Col>
+								<Col size="md-2">
+									<button 
+										type="button"
+										className="btn btn-primary"
+										onClick={this.handleCatSubmit}
+									>
+									Add
+									</button>
+								</Col>
+							</form>
+						</Row>
+					</div>
+					<Row>
+						<Col size="md-12">
+							<div className="card" id="cat-list">
+								<div id="inner-cat-list">
+									<div className="card-body">
+										<h4>Category List</h4>
+									</div>
+									<ul className="list-group">
+										{this.props.cats.map((cat, index) => (
+											<SettingsList 
+												name="catList"
+												cat={cat} 
+												key={cat + "=catkey"} 
 												userkey={this.props.user}
 												update={this.props.update} 
 											/>

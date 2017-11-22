@@ -26,7 +26,11 @@ module.exports = {
 			.catch(err => res.json(err));
 	},
 	addNewCat: function(req, res) {
-
+		console.log(req.body);
+		db.User
+			.findByIdAndUpdate(req.body._id, {$push: { "cat": req.body.cat }}, { new: true })
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.json(err));
 	},
 	pushNewUrl: function(req, res) {
 		console.log(req.body);
@@ -36,7 +40,11 @@ module.exports = {
 			.catch(err => res.json(err));
 	},
 	deleteCat: function(req, res) {
-
+		console.log(req.body);
+		db.User
+			.findByIdAndUpdate(req.body._id, {$pull: { "cat": req.body.cat }}, { new: true })
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.json(err));
 	},
 	changeCat: function(req, res) {
 

@@ -17,6 +17,7 @@ class App extends Component {
             key: "",
             page: "",
             urlArray: [],
+            urlCatArray: [],
             urlKeyArray: [],
             catArray: [],
             count: 0
@@ -29,7 +30,6 @@ class App extends Component {
         if (temp) {
             this.updateUser();
         }
-        console.log(this.state.catArray);
     }
 
     // Grab all urls from logged in user
@@ -42,6 +42,7 @@ class App extends Component {
             console.log(res);
             let tempUrlArr = [];
             let tempUrlKeyArr = [];
+            let tempCatUrlArr = [];
             let tempCatArr = ["Home"];
             let tempCount = 0;
             console.log(res.data);
@@ -49,11 +50,13 @@ class App extends Component {
                 if (this.state.page === "Settings") {
                     tempUrlArr.push(res.data.links[i].url);
                     tempUrlKeyArr.push(res.data.links[i]._id);
+                    tempCatUrlArr.push(res.data.links[i].cat);
                     tempCount++;
                 }
                 if (res.data.links[i].cat === this.state.page) {
                     tempUrlArr.push(res.data.links[i].url);
                     tempUrlKeyArr.push(res.data.links[i]._id);
+                    tempCatUrlArr.push(res.data.links[i].cat);
                     tempCount++;
                 }
             }
@@ -62,6 +65,7 @@ class App extends Component {
             }
             this.setState({
                 urlArray: tempUrlArr,
+                urlCatArray: tempCatUrlArr,
                 urlKeyArray: tempUrlKeyArr,
                 catArray: tempCatArr,
                 count: tempCount
@@ -161,10 +165,12 @@ class App extends Component {
                                 ?    <View 
                                         view={this.state.page} 
                                         userkey={this.state.key} 
-                                        urls={this.state.urlArray} 
+                                        urls={this.state.urlArray}
+                                        cats={this.state.catArray} 
                                         count={this.state.count}
                                         update={this.loadUrls.bind(this)}
                                         urlkeys={this.state.urlKeyArray}
+                                        urlcats={this.state.urlCatArray}
                                      />
                                 :    <View view="" />
                             }
