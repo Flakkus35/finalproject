@@ -9,7 +9,6 @@ class Settings extends Component {
 		urlInput: "",
 		catInput: "",
 		userKey: this.props.user,
-		urlOption: "Home",
 		urlArray: this.props.urlkeys,
 		catArray: this.props.cats,
 		urlCatArray: this.props.urlcats,
@@ -53,7 +52,7 @@ class Settings extends Component {
 			API.addUrl({
 				_id: this.state.userKey,
 				url: tempUrl,
-				cat: this.state.urlOption
+				cat: this.state.catChoice
 			})
 			.then(res => this.props.update())
 			.catch(err => console.log(err));

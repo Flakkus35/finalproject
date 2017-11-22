@@ -15,6 +15,13 @@ class LoginModal extends Component {
 	    });
 	};
 
+	clearForm() {
+		this.setState({
+			usernameInput: "",
+			passwordInput: ""
+		});
+	}
+
 	handleFormSubmit = event => {
 		event.preventDefault();
 		if (this.state.usernameInput && this.state.passwordInput) {
@@ -27,14 +34,15 @@ class LoginModal extends Component {
 				document.cookie = `username=${res.data.username}; path=/`;
 				document.cookie = `key=${res.data._id}; path=/`;
 				this.props.update();
+				this.clearForm();
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+				console.log(err);
+				this.clearForm();
+			});
 		} else {
 			alert(`Please enter both a username and password`);
-			this.setState({
-				usernameInput: "",
-				passwordInput: ""
-			});
+			this.clearForm();
 		}
 
 	}

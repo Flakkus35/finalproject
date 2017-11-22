@@ -33,7 +33,20 @@ class View extends Component {
 	
 	// Returns chosen page
 	viewPage() {
-		if (this.state.page === "Home" && this.props.urls.length !== 0) {
+		if (!this.props.urls) {
+			return (
+				<div className="card">
+					<div className="card-body">
+						<Row>
+							<Col size="md-12">
+								<p>Whoops there are no urls in this page!</p>
+								<p>Head over to the Settings page to add some.</p>
+							</Col>
+						</Row>
+					</div>
+				</div>
+			);
+		} else if (this.state.page !== "Settings") {
 			return (
 				<div className="card">
 					<div className="card-body">
@@ -55,31 +68,6 @@ class View extends Component {
 					cats={this.props.cats}
 					urlcats={this.props.urlcats}
 				/>
-			);
-		} else if (this.state.page === "Custom") {
-			return (
-				<div className="card">
-					<div className="card-body">
-						<Row>
-							<Col size="md-12">
-								<h1>Custom</h1>
-							</Col>
-						</Row>
-					</div>
-				</div>
-			);
-		} else {
-			return (
-				<div className="card">
-					<div className="card-body">
-						<Row>
-							<Col size="md-12">
-								<p>Whoops there are no urls in this page!</p>
-								<p>Head over to the Settings page to add some.</p>
-							</Col>
-						</Row>
-					</div>
-				</div>
 			);
 		}
 	}

@@ -15,6 +15,14 @@ class SignupModal extends Component {
 	    });
 	};
 
+	clearForm() {
+		this.setState({
+			usernameInput: "",
+			passwordInput: "",
+			confirmPassword: ""
+		});
+	}
+
 	handleFormSubmit = event => {
 		event.preventDefault();
 		if (this.state.signupUser && this.state.signupPassword) {
@@ -30,24 +38,21 @@ class SignupModal extends Component {
 					document.cookie = `username=${res.data.username}; path=/`;
 					document.cookie = `key=${res.data._id}; path=/`;
 					this.props.update();
-
+					this.clearForm();
 				})
-				.catch(err => console.log(err));
-			} else {
-				return alert(`Passwords do not match`);
-				this.setState({
-					usernameInput: "",
-					passwordInput: "",
-					confirmPassword: ""
+				.catch(err => {
+					console.log(err);
+					this.clearForm();
 				});
+			} else {
+				this.clearForm();
+				alert(`Passwords do not match`);
+				
 			}
 		} else {
+			this.clearForm();
 			alert(`Please enter both a username and password`);
-			this.setState({
-				usernameInput: "",
-				passwordInput: "",
-				confirmPassword: ""
-			});
+			
 		}
 	}
 

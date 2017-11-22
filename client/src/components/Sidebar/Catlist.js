@@ -6,6 +6,7 @@ export const Catlist = props =>
 		<li className="list-group-item">
 			<a 
 				className="cat-header"
+				value={props.group}
 				onClick={props.goto}
 			>
 				{props.group}

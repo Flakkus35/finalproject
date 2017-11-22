@@ -17,7 +17,7 @@ class Sidebar extends Component {
 								<Catlist 
 									group={cat} 
 									key={cat + "=key"}
-									goto={this.props.gohome}
+									goto={this.props.navigate}
 								/>
 							))}
 						</ul>
@@ -40,7 +40,8 @@ class Sidebar extends Component {
 					</div>
 					<a
 						id="setting-link"
-						onClick={this.props.settings}
+						value="Settings"
+						onClick={this.props.navigate}
 					>
 					Settings
 					</a>

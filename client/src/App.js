@@ -22,7 +22,7 @@ class App extends Component {
             catArray: [],
             count: 0
         }
-    }
+    };
 
     // Grabs any user cookies to display
     componentWillMount() {
@@ -30,7 +30,7 @@ class App extends Component {
         if (temp) {
             this.updateUser();
         }
-    }
+    };
 
     // Grab all urls from logged in user
     loadUrls() {
@@ -76,7 +76,7 @@ class App extends Component {
             });
         })
         .catch(err => console.log(err));
-    }
+    };
 
     // Updates App state and cookie with username
     updateUser() {
@@ -91,12 +91,12 @@ class App extends Component {
             page: "Home"
         },
         () => this.loadUrls());
-    }
+    };
 
     // Registers that App's state was changed
     componentDidUpdate() {
         console.log(`App updated ${this.state.user}`);
-    }
+    };
 
     // Grabs a cookie by key name
     getCookie(cookName) {
@@ -112,7 +112,7 @@ class App extends Component {
             }
         }
         return "";
-    }
+    };
 
     // Logs user out
     logout() {
@@ -123,19 +123,27 @@ class App extends Component {
             key: "",
             page: "Home"
         });
-    }
+    };
 
     // Switch to Settings View component
-    goToSettings() {
-        this.setState({
-            page: "Settings"
-        });
-    }
+    // goToSettings() {
+    //     this.setState({
+    //         page: "Settings"
+    //     });
+    // };
 
     // Switch to Home View component
     goToHome() {
         this.setState({
             page: "Home"
+        },
+        () => this.loadUrls());
+    };
+
+    navigate = event => {
+        const name = (event.target.getAttribute("value"));
+        this.setState({
+            page: name
         },
         () => this.loadUrls());
     }
@@ -154,10 +162,9 @@ class App extends Component {
                 			<Sidebar 
                 				module1="Categories"
                 				module2="Social"
-                                settings={this.goToSettings.bind(this)}
+                                navigate={this.navigate.bind(this)}
                                 cats={this.state.catArray}
                                 name={this.state.page}
-                                gohome={this.goToHome.bind(this)}
                 			/>
                 		</Col>
                 		<Col size="md-10">
