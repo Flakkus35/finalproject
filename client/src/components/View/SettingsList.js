@@ -64,11 +64,19 @@ class SettingsList extends Component {
 					>
 						X
 					</button>
-					<div className="card url-cat-card">
-						<div className="card-body">
-							{this.props.cat}
-						</div>
-					</div>
+					<button 
+						className="btn btn-success save-btn"
+						type="button"
+					>
+						Save
+					</button>
+					<select className="form-control url-cat-drop">
+						{this.props.catArray.map((cat, index) => (
+							<option value={cat} key={index}>
+								{this.props.cat}
+							</option>
+						))}
+					</select>
 				</li>
 			);
 		} else if (this.props.name === "catList") {

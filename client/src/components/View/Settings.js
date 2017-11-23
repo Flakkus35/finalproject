@@ -155,9 +155,9 @@ class Settings extends Component {
 									<div id="inner-settings-list">
 										<div className="card-header" role="tab" id="headingOne">
 											<h4 className="mb-0">
-												<a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+												<a className="list-header" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 													Site List
-												<span className="badge badge-secondary" id="total-links">{this.state.urlArray.length}</span>
+												<span className="badge badge-secondary array-total">{this.state.urlArray.length}</span>
 												</a>
 											</h4>
 										</div>
@@ -168,7 +168,9 @@ class Settings extends Component {
 														<SettingsList 
 															name="urlList"
 															cat={this.state.urlCatArray[index]}
-															url={url} 
+															url={url}
+															catArray={this.state.catArray} 
+															total={index}
 															key={url + "=urlkey"} 
 															urlkey={this.state.urlArray[index]}
 															userkey={this.props.user}
@@ -215,9 +217,9 @@ class Settings extends Component {
 									<div id="inner-cat-list">
 										<div className="card-header" role="tab" id="headingTwo">
 											<h4 className="mb-0">
-												<a data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+												<a className="list-header" data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 													Category List
-												<span className="badge badge-secondary" id="total-links">{this.state.catArray.length - 1}</span>
+												<span className="badge badge-secondary array-total">{this.state.catArray.length - 1}</span>
 												</a>
 											</h4>
 										</div>
