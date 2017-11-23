@@ -54,10 +54,12 @@ class App extends Component {
                     tempCount++;
                 }
                 if (res.data.links[i].cat === this.state.page) {
-                    tempUrlArr.push(res.data.links[i].url);
-                    tempUrlKeyArr.push(res.data.links[i]._id);
-                    tempCatUrlArr.push(res.data.links[i].cat);
-                    tempCount++;
+                    if (tempUrlArr.length < 8) {
+                        tempUrlArr.push(res.data.links[i].url);
+                        tempUrlKeyArr.push(res.data.links[i]._id);
+                        tempCatUrlArr.push(res.data.links[i].cat);
+                        tempCount++;
+                    }
                 }
             }
             for (var j = 0; j < res.data.cat.length; j++) {

@@ -34,6 +34,13 @@ class Settings extends Component {
 			},
 			() => console.log(this.state.urlCatArray));
 		}
+	};
+
+	clearForm() {
+		this.setState({
+			urlInput: "",
+			catInput: ""
+		});
 	}
 
 	handleInputChange = event => {
@@ -54,8 +61,14 @@ class Settings extends Component {
 				url: tempUrl,
 				cat: this.state.catChoice
 			})
-			.then(res => this.props.update())
-			.catch(err => console.log(err));
+			.then(res => {
+				this.clearForm();
+				this.props.update()
+			})
+			.catch(err => {
+				this.clearForm();
+				console.log(err)
+			});
 		} else {
 			return alert("Enter a link to add first!");
 		}
@@ -68,8 +81,14 @@ class Settings extends Component {
 				_id: this.state.userKey,
 				cat: this.state.catInput
 			})
-			.then(res => this.props.update())
-			.catch(err => console.log(err));
+			.then(res => {
+				this.clearForm();
+				this.props.update()
+			})
+			.catch(err => {
+				this.clearForm();
+				console.log(err)
+			});
 		} else {
 			return alert("Enter a new category first!");
 		}
@@ -131,24 +150,35 @@ class Settings extends Component {
 					</div>
 					<Row>
 						<Col size="md-12">
-							<div className="card" id="settings-list">
-								<div id="inner-settings-list">
-									<div className="card-body">
-										<h4>Site List</h4>
+							<div id="accordion" role="tablist">
+								<div className="card" id="settings-list">
+									<div id="inner-settings-list">
+										<div className="card-header" role="tab" id="headingOne">
+											<h4 className="mb-0">
+												<a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+													Site List
+												<span className="badge badge-secondary" id="total-links">{this.state.urlArray.length}</span>
+												</a>
+											</h4>
+										</div>
+										<div id="collapseOne" className="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+											<div className="card-body">
+												<ul className="list-group">
+													{this.props.urls.map((url, index) => (
+														<SettingsList 
+															name="urlList"
+															cat={this.state.urlCatArray[index]}
+															url={url} 
+															key={url + "=urlkey"} 
+															urlkey={this.state.urlArray[index]}
+															userkey={this.props.user}
+															update={this.props.update} 
+														/>
+													))}
+												</ul>
+											</div>
+										</div>
 									</div>
-									<ul className="list-group">
-										{this.props.urls.map((url, index) => (
-											<SettingsList 
-												name="urlList"
-												cat={this.state.urlCatArray[index]}
-												url={url} 
-												key={url + "=urlkey"} 
-												urlkey={this.state.urlArray[index]}
-												userkey={this.props.user}
-												update={this.props.update} 
-											/>
-										))}
-									</ul>
 								</div>
 							</div>	
 						</Col>
@@ -180,22 +210,31 @@ class Settings extends Component {
 					</div>
 					<Row>
 						<Col size="md-12">
-							<div className="card" id="cat-list">
-								<div id="inner-cat-list">
-									<div className="card-body">
-										<h4>Category List</h4>
+							<div id="accordion" role="tablist">
+								<div className="card" id="cat-list">
+									<div id="inner-cat-list">
+										<div className="card-header" role="tab" id="headingTwo">
+											<h4 className="mb-0">
+												<a data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+													Category List
+												<span className="badge badge-secondary" id="total-links">{this.state.catArray.length - 1}</span>
+												</a>
+											</h4>
+										</div>
+										<div id="collapseTwo" className="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+											<ul className="list-group">
+												{this.props.cats.map((cat, index) => (
+													<SettingsList 
+														name="catList"
+														cat={cat} 
+														key={cat + "=catkey"} 
+														userkey={this.props.user}
+														update={this.props.update} 
+													/>
+												))}
+											</ul>
+										</div>
 									</div>
-									<ul className="list-group">
-										{this.props.cats.map((cat, index) => (
-											<SettingsList 
-												name="catList"
-												cat={cat} 
-												key={cat + "=catkey"} 
-												userkey={this.props.user}
-												update={this.props.update} 
-											/>
-										))}
-									</ul>
 								</div>
 							</div>	
 						</Col>

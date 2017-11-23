@@ -2,7 +2,8 @@
 	border: 1px solid blue;
 	padding: 20px;
 	margin-right: 100px;
-	/*height: 900px;*/
+	height: 800px;
+	overflow-y: scroll;
 	background: white;
 }
 
@@ -81,4 +82,9 @@
 	margin-right: 100px;
 	width: 100px;
 	text-align: center;
+}
+
+#total-links {
+	float: right;
+	margin-right: 15px;
 }
