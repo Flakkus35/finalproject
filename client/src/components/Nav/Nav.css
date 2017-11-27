@@ -1,18 +1,32 @@
 #title {
 	margin-top: 10px;
 	font-size: 50px;
+	border-bottom: 3px solid green;
+	margin-left: 10px;
 }
 
 .navbar {
-	height: 75px;
+	height: 8rem;
 	z-index: 2;
-	background: #e1e1ff;
+	background: #f2fff4;
+}
+
+#brand-tree {
+	border: 5px solid green;
+	border-radius: 5px; 
+	padding: 3px;
+}
+
+#title, #title:hover {
+	text-decoration: none;
+	cursor: pointer;
+	color: #904747;
+	font-family: 'Chelsea Market', cursive;
 }
 
 .login-panel {
 	float: right;
 	height: 75px;
-	border: 1px solid yellow;
 	background: white;
 }
 
@@ -47,9 +61,9 @@
 
 #profile-card {
 	float: left;
-	border: 1px solid red;
 	text-align: center;
-	width: 200px;
+	width: 20rem;
+	height: 8rem;
 }
 
 #profile-link {
@@ -63,5 +77,13 @@
 }
 
 #user-welcome {
-	background: #f5f5f5;
+	background: #2a5d1e;
+	color: white;
+	font-family: 'Chelsea Market', cursive;
+	font-size: 2rem;
+}
+
+#user-options {
+	height: 3rem;
+	background: #fff5e4;
 }

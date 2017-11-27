@@ -49,7 +49,7 @@ class SettingsList extends Component {
 		})
 		.then(res => this.props.update())
 		.catch(err => console.log(err));
-	}
+	};
 
 	render() {
 		if (this.props.name === "urlList") {
@@ -64,19 +64,11 @@ class SettingsList extends Component {
 					>
 						X
 					</button>
-					<button 
-						className="btn btn-success save-btn"
-						type="button"
-					>
-						Save
-					</button>
-					<select className="form-control url-cat-drop">
-						{this.props.catArray.map((cat, index) => (
-							<option value={cat} key={index}>
-								{this.props.cat}
-							</option>
-						))}
-					</select>
+					<div className="card cat-url-card">
+						<div className="card-body">
+							{this.props.cat}
+						</div>
+					</div>
 				</li>
 			);
 		} else if (this.props.name === "catList") {

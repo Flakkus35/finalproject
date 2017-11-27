@@ -4,13 +4,19 @@ import { Catlist } from "./Catlist";
 
 class Sidebar extends Component {
 
+	goToSocial = event => {
+		let name = event.target.getAttribute("href");
+		console.log(name);
+		window.location=name;
+	};
+
 	render() {
 		return (
 			<div id="sidebar">
 				<div className="sidebar-link">
-					<div className="card" id="group-card">
-						<div className="card-header">
-							Groups
+					<div className="card group-card">
+						<div className="card-header group-card-header">
+							Pages
 						</div>
 						<ul className="list-group list-group-flush">
 							{this.props.cats.map(cat => (
@@ -22,29 +28,40 @@ class Sidebar extends Component {
 							))}
 						</ul>
 					</div>
-					<div className="card" id="group-card">
-						<div className="card-header">
+					<div className="card group-card">
+						<div className="card-header group-card-header">
 							Social
 						</div>
 						<ul className="list-group list-group-flush">
-							<li className="list-group-item">
-								<a id="facebook-link" href="http://facebook.com">Facebook</a>
-							</li>
-							<li className="list-group-item">
-								<a id="twitter-link" href="http://twitter.com">Twitter</a>
-							</li>
-							<li className="list-group-item">
-								<a id="google-link" href="http://google.com">Google</a>
+							<div className="start-cat">
+								<li className="list-group-item list-group-flush side-cat-list" onClick={this.goToSocial}>
+									<p id="facebook-link" className="cat-header" href="http://facebook.com">Facebook</p>
+								</li>
+							</div>
+							<div className="start-cat">
+								<li className="list-group-item list-group-flush side-cat-list" onClick={this.goToSocial}>
+									<p id="twitter-link" className="cat-header" href="http://twitter.com">Twitter</p>
+								</li>
+							</div>
+							<div className="start-cat">
+								<li className="list-group-item list-group-flush side-cat-list" onClick={this.goToSocial}>
+									<p id="google-link" className="cat-header" href="http://google.com">Google</p>
+								</li>
+							</div>
+						</ul>
+					</div>
+					<div className="card setting-card">
+						<ul className="list-group list-group-flush" id="side-set-list">
+							<li className="list-group-item" id="settings-btn" onClick={this.props.navigate}>
+								<p
+									className="setting-link"
+									value="Settings"
+								>
+								Settings
+								</p>
 							</li>
 						</ul>
 					</div>
-					<a
-						id="setting-link"
-						value="Settings"
-						onClick={this.props.navigate}
-					>
-					Settings
-					</a>
 				</div>
 			</div>
 		);

@@ -144,10 +144,14 @@ class App extends Component {
 
     navigate = event => {
         const name = (event.target.getAttribute("value"));
-        this.setState({
-            page: name
-        },
-        () => this.loadUrls());
+        if (this.state.page === name) {
+            return console.log("Already at " + name);
+        } else {
+            this.setState({
+                page: name
+            },
+            () => this.loadUrls());
+        }
     }
 
     render() {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Nav.css";
 import Login from "./Login";
+import tree from "../../util/images/brand-tree.png";
 
 class Nav extends Component {
   state = {
@@ -21,12 +22,15 @@ class Nav extends Component {
       <nav className="navbar navbar-inverse navbar-top">
       	<div className="container-fluid">
           	<div className="navbar-header">
+              <a className="navbar-brand">
+                <img id="brand-tree" src={tree} width="50" height="50" alt="" />
+              </a>
           		<a 
                 id="title" 
-                className="navbar-brand"
+                className="nav-title navbar-brand"
                 onClick={this.props.home}
               >
-            		Working Title
+            		Sprout
           		</a>
         		</div>
         		<div className="collapse navbar-collapse" id="navbarNavAltMarkup">
