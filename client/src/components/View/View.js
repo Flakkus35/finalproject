@@ -43,7 +43,7 @@ class View extends Component {
 			return (
 				<div>
 					<p className="no-url-p">No waypoints charted yet!</p>
-					<img className="no-url-img" height="300" width="300" src={notFound} />
+					<img className="no-url-img" alt="No Urls" height="300" width="300" src={notFound} />
 				</div>
 			)
 		}

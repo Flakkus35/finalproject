@@ -97,3 +97,18 @@
 	background: #1a0e73;
 	color: white;
 }
+
+.google-search {
+	float: right;
+	padding: 10px;
+	margin-right: 100px;
+}
+
+#google-search-btn {
+	margin-left: 5px;
+	height: 4rem;
+}
+
+#googleInput {
+	width: 50rem;
+}
