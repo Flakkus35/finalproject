@@ -1,6 +1,6 @@
 {
-    "short-name": "Sprout",
-    "name": "React Sprout",
+    "short_name": "Cast Off",
+    "name": "Cast Off React App",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

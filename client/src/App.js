@@ -123,7 +123,8 @@ class App extends Component {
         this.setState({
             user: "",
             key: "",
-            page: "Home"
+            page: "Home",
+            catArray: []
         });
     };
 

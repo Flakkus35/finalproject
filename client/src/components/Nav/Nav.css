@@ -1,33 +1,40 @@
 #title {
 	margin-top: 10px;
 	font-size: 50px;
-	border-bottom: 3px solid green;
 	margin-left: 10px;
 }
 
 .navbar {
 	height: 8rem;
 	z-index: 2;
-	background: #f2fff4;
+	background: #c1f9ff;
 }
 
-#brand-tree {
-	border: 5px solid green;
-	border-radius: 5px; 
+#brand-cast {
+	/*border: 2px solid blue;*/
+	border-radius: 1px; 
 	padding: 3px;
+	position: absolute;
+	top: 0px;
+	left: 0;
 }
 
 #title, #title:hover {
 	text-decoration: none;
 	cursor: pointer;
-	color: #904747;
-	font-family: 'Chelsea Market', cursive;
+	color: #000a8a;
+	font-family: 'Boogaloo', cursive;
+	margin-left: 70px;
+	border-left: 2px outset #dcdcff;
+	position: absolute;
+	top: 3px;
 }
 
 .login-panel {
 	float: right;
-	height: 75px;
-	background: white;
+	height: 7.9rem;
+	border-left: 5px solid #c3c3ff;
+	border-right: 5px solid #c3c3ff;
 }
 
 #login-btn, #user-btn {
@@ -77,13 +84,16 @@
 }
 
 #user-welcome {
-	background: #2a5d1e;
+	background: #ad581a;
 	color: white;
-	font-family: 'Chelsea Market', cursive;
-	font-size: 2rem;
+	font-family: 'Boogaloo', cursive;
+	font-size: 3rem;
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 
 #user-options {
 	height: 3rem;
-	background: #fff5e4;
+	background: #1a0e73;
+	color: white;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Nav.css";
 import Login from "./Login";
-import tree from "../../util/images/brand-tree.png";
+import cast from "../../util/images/castoff-favicon.png";
 
 class Nav extends Component {
   state = {
@@ -23,14 +23,14 @@ class Nav extends Component {
       	<div className="container-fluid">
           	<div className="navbar-header">
               <a className="navbar-brand">
-                <img id="brand-tree" src={tree} width="50" height="50" alt="" />
+                <img id="brand-cast" src={cast} width="80" height="80" alt="" />
               </a>
           		<a 
                 id="title" 
                 className="nav-title navbar-brand"
                 onClick={this.props.home}
               >
-            		Sprout
+            		Cast Off
           		</a>
         		</div>
         		<div className="collapse navbar-collapse" id="navbarNavAltMarkup">

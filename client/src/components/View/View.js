@@ -3,6 +3,7 @@ import "./View.css";
 import { Container, Col, Row } from "../Grid";
 import { LinkBlock } from "./LinkBlock";
 import Settings from "./Settings";
+import notFound from "../../util/images/no-view-map.png";
 
 class View extends Component {
 	state = {
@@ -30,17 +31,35 @@ class View extends Component {
 			);
 		}
 	}
+
+	viewNone() {
+		if (!this.props.userkey) {
+			return (
+				<div>
+					<p>Login to start adding waypoints</p>
+				</div>
+			)
+		} else {
+			return (
+				<div>
+					<p className="no-url-p">No waypoints charted yet!</p>
+					<img className="no-url-img" height="300" width="300" src={notFound} />
+				</div>
+			)
+		}
+	}
 	
 	// Returns chosen page
 	viewPage() {
-		if (!this.props.urls) {
+		if (this.state.page !== "Settings" && (!this.props.urls || !this.props.urls[0])) {
 			return (
 				<div className="card">
 					<div className="card-body">
 						<Row>
 							<Col size="md-12">
-								<p>Whoops there are no urls in this page!</p>
-								<p>Head over to the Settings page to add some.</p>
+								<div className="no-login-view">
+									{this.viewNone()}
+								</div>
 							</Col>
 						</Row>
 					</div>

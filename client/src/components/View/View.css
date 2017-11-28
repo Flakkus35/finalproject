@@ -1,11 +1,12 @@
 #main-view {
-	border: 10px solid #402e13;
+	border: 5px solid #b4bde2;
 	box-shadow: 5px 5px 5px #888888;
 	padding: 20px;
 	margin-right: 100px;
 	height: 80rem;
-	overflow-y: scroll;
+	overflow-y: auto;
 	background: white;
+	background: #c1f9ff;
 }
 
 .view-header {
@@ -14,18 +15,21 @@
 	box-shadow: 5px 5px 5px #888888;
 	border-top: 1px solid #dedede;
 	border-left: 1px solid #dedede;
+	font-family: 'Chelsea Market', cursive;
+	color: #000a8a;
+	background: white;
 }
 
 .link-block {
 	padding-bottom: 10px;
 	padding-top: 10px;
 	margin: auto;
-	/*height: 300px;*/
 	width: 300px;
 	margin-top: 40px;
 	box-shadow: 2px 2px 2px #888888;
 	border-top: 1px solid #dedede;
 	border-left: 1px solid #dedede;
+	background: white;
 }
 
 .url-image {
@@ -63,7 +67,7 @@
 
 #settings-list, #cat-list {
 	border: 1px solid black;
-	background: #636363;
+	background: #afc0ff;
 }
 
 #inner-settings-list, #inner-cat-list {
@@ -120,13 +124,13 @@
 }
 
 .list-header, .list-header:focus {
-	color: white;
+	color: #000a8a;
 	text-decoration: none;
 }
 
 .list-header:hover, .list-header:active {
 	text-decoration: none;
-	color: #e0e0e0;
+	color: white;
 }
 
 .cat-url-card {
@@ -141,3 +145,32 @@
 	color: white;
 	padding-left: 3px;
 }
+
+#profile-link, #logout-link {
+	color: white;
+	cursor: pointer;
+	/*padding-right: 10px;
+	padding-left: 10px;*/
+	width: 9rem;
+}
+
+.no-login-view {
+	text-align: center;
+	margin: auto;
+	margin-top: 5rem;
+	border: 1px solid #d4d4ff;
+	height: 35rem;
+	width: 35rem;
+}
+
+.no-url-p {
+	font-size: 20px;
+	background: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom: 2px solid #d4d4ff;
+	color: #000a8a;
+	font-weight: bold;
+	font-family: 'Chelsea Market', cursive;
+}
+

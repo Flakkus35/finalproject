@@ -8,8 +8,8 @@
 	padding-top: 20px;
 	overflow-x: hidden;
 	overflow-y: auto;
-	background-color: #402e13;
-	border-right: 1px solid black;
+	background-color: #ebf5ff;
+	border-right: 4px solid #c8c8ff;
 }
 
 .sidebar-link {
@@ -20,16 +20,16 @@
 }
 
 .group-card {
-	border: 10px ridge brown;
+	border: 10px ridge #b4bde2;
 	width: 25rem;
 	margin-bottom: 20px;
-	background: #fff5e4;
-	color: #904747;
+	background: #fffcf7;
+	color: #545454;
 	font-family: 'Chelsea Market', cursive;
 }
 
 .group-card-header {
-	border-bottom: 10px ridge brown;
+	border-bottom: 10px ridge #b4bde2;
 	font-size: 30px;
 	margin-bottom: 10px;
 }
@@ -65,7 +65,7 @@
 }
 
 .setting-card {
-	border: 10px ridge brown;
+	border: 10px ridge #b4bde2;
 	width: 25rem;
 	background: #fff5e4;
 	color: #904747;
@@ -84,7 +84,7 @@
 
 #settings-btn {
 	padding: 0px;
-	color: #904747;
+	color: #545454;
 	border: none;
 	background: white;
 }
