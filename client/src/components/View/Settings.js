@@ -104,10 +104,26 @@ class Settings extends Component {
 		}
 	}
 
+	makeWaypoint = (title) => {
+		console.log(title);
+	}
+
 	render() {
 		return (
 			<div className="card">
 				<div className="card-body">
+				
+				<a 
+					href="javascript:(function() {
+						if (window.location.href === 'http://localhost:3000/') {
+							console.log(window.clipboardData);
+						} else {
+							var node=document.createElement('textarea'),selection=document.getSelection();node.textContent=window.location.href,document.body.appendChild(node),selection.removeAllRanges(),node.select(),document.execCommand('copy'),selection.removeAllRanges(),document.body.removeChild(node);
+						}
+					})()"
+				>
+					Make Waypoint
+				</a>
 					<div id="add-url">	
 						<h4 className="setting-title">Add New Link</h4>
 						<Row>

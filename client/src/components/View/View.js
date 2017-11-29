@@ -48,6 +48,10 @@ class View extends Component {
 			)
 		}
 	}
+
+	makeWaypoint = title => {
+		console.log('works');
+	}
 	
 	// Returns chosen page
 	viewPage() {
@@ -71,7 +75,11 @@ class View extends Component {
 					<div className="card-body">
 						<Row>
 							{this.props.urls.map(url => (
-								<LinkBlock urlname={url} key={url + "=key"}/>
+								<LinkBlock 
+									urlname={url} 
+									key={url + "=key"}
+									shorturl={"//logo.clearbit.com/" + url}
+								/>
 							))}
 						</Row>
 					</div>
@@ -86,6 +94,7 @@ class View extends Component {
 					urlkeys={this.props.urlkeys}
 					cats={this.props.cats}
 					urlcats={this.props.urlcats}
+					bookmark={this.makeWaypoint.bind(this)}
 				/>
 			);
 		}

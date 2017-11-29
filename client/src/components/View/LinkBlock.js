@@ -6,7 +6,7 @@ export const LinkBlock = props =>
 		<Col size="md-3">
 			<div className="link-block">
 				<div>
-					<img className="url-image" href={props.urlname} alt={props.urlname} />
+					<a href={props.urlname}><img className="url-image" src={props.shorturl} alt={props.urlname} /></a>
 				</div>
 				<div className="url-link-block">
 					<a href={props.urlname}>{props.urlname}</a>
