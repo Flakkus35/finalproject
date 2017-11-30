@@ -1,14 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import "./Sidebar.css";
 
-export const Catlist = props =>
-	<div className="start-cat">
-		<li className="list-group-item side-cat-list" onClick={props.goto}>
-			<p 
-				className="cat-header"
-				value={props.group}
-			>
-				{props.group}
-			</p>
-		</li>
-	</div>;
+class Catlist extends Component {
+			
+	render() {
+		if (this.props.group !== "None") {
+			return (
+				<div className="start-cat">
+					<li className="list-group-item side-cat-list" onClick={this.props.goto}>
+						<p 
+							className="cat-header"
+							value={this.props.group}
+						>
+							{this.props.group}
+						</p>
+					</li>
+				</div>
+			);
+		} else {
+			return ( <div /> );
+		}
+	}
+}
+
+export default Catlist;

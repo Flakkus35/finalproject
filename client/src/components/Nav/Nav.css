@@ -33,8 +33,9 @@
 .login-panel {
 	float: right;
 	height: 7.9rem;
-	border-left: 5px solid #c3c3ff;
-	border-right: 5px solid #c3c3ff;
+	border-left: 5px solid #ad581a;
+	border-right: 5px solid #ad581a;
+	border-radius: 5px;
 }
 
 #login-btn, #user-btn {
@@ -76,10 +77,12 @@
 #profile-link {
 	margin: 5px;
 	float: left;
+	font-size: 20px;
 }
 
 #logout-link {
 	margin: 5px;
+	font-size: 20px;
 	float: right;
 }
 
@@ -88,14 +91,13 @@
 	color: white;
 	font-family: 'Boogaloo', cursive;
 	font-size: 3rem;
-	padding-top: 3px;
-	padding-bottom: 3px;
 }
 
 #user-options {
-	height: 3rem;
+	height: 3.6rem;
 	background: #1a0e73;
 	color: white;
+	font-family: 'Boogaloo', cursive;
 }
 
 .google-search {

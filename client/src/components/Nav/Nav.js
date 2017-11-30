@@ -11,7 +11,6 @@ class Nav extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.name !== nextProps.name) {
-      // console.log(`old: ${this.props.name}, new: ${nextProps.name}`);
       this.setState({
         view: nextProps.name
       });
@@ -45,6 +44,7 @@ class Nav extends Component {
         			<Login 
                 user={this.state.view}
                 logout={this.props.logout}
+                navigate={this.props.navigate}
               />
         		  <div className="google-search navbar-form navbar-right">
                 <div className="form-group">

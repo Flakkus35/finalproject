@@ -20,7 +20,7 @@
 }
 
 .group-card {
-	border: 10px ridge #b4bde2;
+	border: 7px ridge #b4bde2;
 	width: 25rem;
 	margin-bottom: 20px;
 	background: #fffcf7;
@@ -29,14 +29,9 @@
 }
 
 .group-card-header {
-	border-bottom: 10px ridge #b4bde2;
+	background: #dedede;
 	font-size: 30px;
 	margin-bottom: 10px;
-}
-
-.card-header {
-	padding-top: 10px;
-	padding-bottom: 10px;
 }
 
 .setting-link {
@@ -91,4 +86,8 @@
 
 .start-cat {
 	border-bottom: 1px solid #dedede;
+}
+
+.sidebar-body {
+	margin-bottom: 0px;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from "../../util/API";
+/* global $ */
 
 class SignupModal extends Component {
 	state = {
@@ -21,7 +22,17 @@ class SignupModal extends Component {
 			passwordInput: "",
 			confirmPassword: ""
 		});
-	}
+	};
+
+	componentDidMount() {
+		$("#signup-modal").on("shown.bs.modal", function() {
+			$("#signupUser").trigger("focus");
+		});
+	};
+
+	closeModal() {
+		$("#signup-modal").modal("hide");
+	};
 
 	handleFormSubmit = event => {
 		event.preventDefault();
@@ -39,6 +50,7 @@ class SignupModal extends Component {
 					document.cookie = `key=${res.data._id}; path=/`;
 					this.props.update();
 					this.clearForm();
+					this.closeModal();
 				})
 				.catch(err => {
 					console.log(err);
@@ -115,8 +127,6 @@ class SignupModal extends Component {
 							<button 
 								className="btn btn-primary"
 								onClick={this.handleFormSubmit}
-								data-toggle="modal"
-								data-target="#signup-modal"
 								disabled={!(this.state.signupUser && this.state.signupPassword)}
 							>
 							Submit

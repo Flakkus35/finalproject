@@ -26,7 +26,11 @@ class Login extends Component {
 									Hello {this.state.username}
 								</div>
 								<div className="card-body" id="user-options">
-									<a id="profile-link">
+									<a 
+										id="profile-link" 
+										onClick={this.props.navigate}
+										value="Settings"
+									>
 										Profile
 									</a>
 									<a 

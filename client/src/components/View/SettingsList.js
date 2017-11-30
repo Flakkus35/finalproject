@@ -72,7 +72,7 @@ class SettingsList extends Component {
 				</li>
 			);
 		} else if (this.props.name === "catList") {
-			if (this.props.cat === "Home") {
+			if (this.props.cat === "Home" || this.props.cat === "None") {
 				return ( <div/> );
 			} else {
 				return (

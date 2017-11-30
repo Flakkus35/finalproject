@@ -1,16 +1,36 @@
-import React from "react";
+import React, { Component } from "react";
 import { Col } from "../Grid";
+import noView from "../../util/images/no-view-map.png";
 
-export const LinkBlock = props =>
-	<div>		
-		<Col size="md-3">
-			<div className="link-block">
-				<div>
-					<a href={props.urlname}><img className="url-image" src={props.shorturl} alt={props.urlname} /></a>
-				</div>
-				<div className="url-link-block">
-					<a href={props.urlname}>{props.urlname}</a>
-				</div>
+class LinkBlock extends Component {
+	state = {
+		url: this.props.urlname,
+		imgLink: this.props.shorturl
+	};
+
+	// Sets default image if get logo fails
+	handleImgFail() {
+		this.setState({
+			imgLink: noView
+		})
+	};
+
+	render() {
+		return (
+			<div>		
+				<Col size="md-3">
+					<div className="link-block">
+						<div>
+							<a href={this.state.url}><img className="url-image" src={this.state.imgLink} onError={this.handleImgFail.bind(this)} alt={this.state.url} /></a>
+						</div>
+						<div className="url-link-block">
+							<a href={this.state.url}>{this.state.url}</a>
+						</div>
+					</div>
+				</Col>
 			</div>
-		</Col>
-	</div>;
+		);
+	}
+}
+
+export default LinkBlock;

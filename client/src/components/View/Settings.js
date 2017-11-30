@@ -12,7 +12,7 @@ class Settings extends Component {
 		urlArray: this.props.urlkeys,
 		catArray: this.props.cats,
 		urlCatArray: this.props.urlcats,
-		catChoice: "Home"
+		catChoice: "None"
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -235,7 +235,7 @@ class Settings extends Component {
 											<h4 className="mb-0">
 												<a className="list-header" data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 													Category List
-												<span className="badge badge-secondary array-total">{this.state.catArray.length - 1}</span>
+												<span className="badge badge-secondary array-total">{this.state.catArray.length - 2}</span>
 												</a>
 											</h4>
 										</div>

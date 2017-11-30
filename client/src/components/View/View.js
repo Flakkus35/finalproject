@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./View.css";
 import { Container, Col, Row } from "../Grid";
-import { LinkBlock } from "./LinkBlock";
+import LinkBlock from "./LinkBlock";
 import Settings from "./Settings";
 import notFound from "../../util/images/no-view-map.png";
 

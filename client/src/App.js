@@ -43,7 +43,7 @@ class App extends Component {
             let tempUrlArr = [];
             let tempUrlKeyArr = [];
             let tempCatUrlArr = [];
-            let tempCatArr = ["Home"];
+            let tempCatArr = ["None", "Home"];
             let tempCount = 0;
             console.log(res.data);
             for (var i = 0; i < res.data.links.length; i++) {
@@ -128,13 +128,6 @@ class App extends Component {
         });
     };
 
-    // Switch to Settings View component
-    // goToSettings() {
-    //     this.setState({
-    //         page: "Settings"
-    //     });
-    // };
-
     // Switch to Home View component
     goToHome() {
         this.setState({
@@ -143,6 +136,7 @@ class App extends Component {
         () => this.loadUrls());
     };
 
+    // Change pages
     navigate = event => {
         const name = (event.target.getAttribute("value"));
         if (this.state.page === name) {
@@ -162,6 +156,7 @@ class App extends Component {
                     name={this.state.user}
                     logout={this.logout.bind(this)}
                     home={this.goToHome.bind(this)}
+                    navigate={this.navigate.bind(this)}
                 />
                 <Container fluid>
                 	<Row>

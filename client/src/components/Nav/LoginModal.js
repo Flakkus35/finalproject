@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Nav.css";
 import API from "../../util/API";
+/* global $ */
 
 class LoginModal extends Component {
 	state = {
@@ -22,6 +23,16 @@ class LoginModal extends Component {
 		});
 	}
 
+	componentDidMount() {
+		$("#login-modal").on("shown.bs.modal", function() {
+			$("#usernameInput").trigger("focus");
+		});
+	}
+
+	closeModal() {
+		$("#login-modal").modal("hide");
+	}
+
 	handleFormSubmit = event => {
 		event.preventDefault();
 		if (this.state.usernameInput && this.state.passwordInput) {
@@ -35,6 +46,7 @@ class LoginModal extends Component {
 				document.cookie = `key=${res.data._id}; path=/`;
 				this.props.update();
 				this.clearForm();
+				this.closeModal();
 			})
 			.catch(err => {
 				console.log(err);
@@ -95,8 +107,6 @@ class LoginModal extends Component {
 							<button 
 								className="btn btn-primary"
 								onClick={this.handleFormSubmit}
-								data-toggle="modal"
-								data-target="#login-modal"
 							>
 							Submit
 							</button>
