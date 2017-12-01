@@ -46,6 +46,13 @@ class Sidebar extends Component {
 								</li>
 							</div>
 						</ul>
+						<ul className="list-group list-group-flush sidebar-body">
+							<li className="list-group-item list-group-flush">
+								<p id="help-page" className="cat-header">
+									How To Use
+								</p>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>

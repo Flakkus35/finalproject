@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const passportLocalMongooseEmail = require("passport-local-mongoose-email");
+const bcrypt = require("bcrypt");
+// const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new Schema({
 	username: {
@@ -15,12 +16,33 @@ const userSchema = new Schema({
 		url: String, 
 		cat: {
 			type: String,
-			default: "none" 
+			default: "None" 
 		}
 	}]
 });
 
-userSchema.plugin(passportLocalMongooseEmail);
+// userSchema.plugin(passportLocalMongoose);
+
+userSchema.methods.comparePassword = function comparePassword(password, cb) {
+	bcrypt.compare(password, this.password, function(err, isMatch) {
+		if (err) return cb(err);
+		cb(null, isMatch);
+	});
+};
+
+userSchema.pre('save', function saveHook(next) {
+	const user = this;
+	if (!user.isModified('password')) return next();
+
+	return bcrypt.genSalt((saltError, salt) => {
+		if (saltError) { return next(hashError); }
+		return bcrypt.hash(user.password, salt, (hashError, hash) => {
+			if (hashError) { return next(hashError); }
+			user.password = hash;
+			return next();
+		});
+	});
+});
 
 const User = mongoose.model("User", userSchema);
 

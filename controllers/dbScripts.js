@@ -1,4 +1,6 @@
 const db = require("../models");
+// const compPass = require("../models/user.js").comparePassword();
+const bcrypt = require("bcrypt");
 
 module.exports = {
 	findUser: function(req, res) {
@@ -65,5 +67,19 @@ module.exports = {
 			.findByIdAndUpdate(req.body.user_id, {$pull: { "links": { "_id": req.body.url_id }}}, {new: true})
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.json(err));
+	},
+	testFind: function(req, res) {
+		db.User.findOne({ username: req.body.username }, function(err, user) {
+			if (err) throw err;
+			if (!user) return res.status(500).send("No User Found");
+			user.comparePassword(req.body.password, function(err, isMatch) {
+				if (err) throw err;
+				if (isMatch) {
+					return res.json(user);
+				} else {
+					return res.status(500).send("Invalid Password");
+				}
+			});
+		});
 	}
 }

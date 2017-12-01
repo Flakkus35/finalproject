@@ -47,7 +47,7 @@
 }
 
 .side-cat-list:hover {
-	background: #fff5e4;
+	background: #d0ffff;
 	color: black;
 	box-shadow: inset 0 0 5px #000000;
 }
@@ -90,4 +90,17 @@
 
 .sidebar-body {
 	margin-bottom: 0px;
+}
+
+#help-page {
+	margin-top: 50px;
+	border-top: 1px solid grey;
+	border-bottom: 1px solid grey;
+	margin-bottom: 10px;
+}
+
+#help-page:hover {
+	background: #d0ffff;
+	cursor: pointer;
+	box-shadow: inset 0 0 5px #000000;
 }

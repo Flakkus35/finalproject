@@ -5,7 +5,7 @@ router.route("/create")
 	.post(dbControl.createUser);
 
 router.route("/login")
-	.put(dbControl.findUser);
+	.put(dbControl.testFind);
 
 router.route("/addurl")
 	.put(dbControl.pushNewUrl);
