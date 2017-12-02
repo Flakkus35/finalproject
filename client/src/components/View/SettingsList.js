@@ -6,7 +6,10 @@ class SettingsList extends Component {
 	state = {
 		delUrlKey: "",
 		delCatKey: "",
-		url: this.props.urlkey
+		url: this.props.urlkey,
+		catArray: this.props.catArray,
+		fullUrls: this.props.fullUrls,
+		changedUrls: []
 	};
 
 	componentWillReceiveProps(nextProps) {
@@ -20,20 +23,28 @@ class SettingsList extends Component {
 				cat: nextProps.catkey
 			});
 		}
+		if (this.state.catArray !== nextProps.catArray) {
+			let tempCats = [];
+			nextProps.catArray.forEach(cat => {
+				if (cat !== this.props.cat) {
+					tempCats.push(cat);
+				}
+			});
+			this.setState({
+				catArray: tempCats
+			});
+		}
 	}
 
 	handleFormSubmit = event => {
 		event.preventDefault();
-		/*API.removeUrl({
-			_id: 
-		})*/
-		const urlkey = event.target.getAttribute("urlkey");
+		const urlkey = event.target.getAttribute("name");
 		this.setState({
 			delUrlKey: urlkey
 		},
 		() => {
 			API.removeUrl({
-				user_id: this.props.userkey,
+				session: this.props.userkey,
 				url_id: urlkey
 			})
 			.then(res => this.props.update())
@@ -44,31 +55,56 @@ class SettingsList extends Component {
 	handleCatSubmit = event => {
 		event.preventDefault();
 		API.removeCat({
-			_id: this.props.userkey,
+			session: this.props.userkey,
 			cat: this.props.cat
 		})
 		.then(res => this.props.update())
 		.catch(err => console.log(err));
 	};
 
+	switchCat = event => {
+		let chosenCat = event.target.parentNode.childNodes[2].value;
+		let chosenUrl = event.target.parentNode.childNodes[0].data;
+		let chosenUrlKey = event.target.parentNode.childNodes[1].name;
+		let tempFullUrls = [];
+		this.state.fullUrls.forEach(object => {
+			if (object.url === chosenUrl) {
+				if (object.cat !== chosenCat) {
+					object.cat = chosenCat;
+					object.isChanged = true;
+					tempFullUrls.push(object);
+				}
+			} 
+		});
+		console.log(tempFullUrls);
+		// API.changeCat({
+		// 	userkey: this.props.userkey,
+		// 	url_id: chosenUrlKey,
+		// 	cat: chosenCat
+		// })
+		// .then(res => console.log(res))
+		// .catch(err => console.log(err));
+	}
+
 	render() {
 		if (this.props.name === "urlList") {
 			return (
-				<li className="list-group-item d-flex justify-content-between align-items-center">
+				<li className="url-list-full list-group-item d-flex justify-content-between align-items-center">
 					{this.props.url}
 					<button 
-						urlkey={this.state.url} 
+						name={this.state.url} 
 						className="btn btn-danger remove-url" 
 						type="button"
 						onClick={this.handleFormSubmit}
 					>
 						X
 					</button>
-					<div className="card cat-url-card">
-						<div className="card-body">
-							{this.props.cat}
-						</div>
-					</div>
+					<select className="form-control url-list-select" onChange={this.switchCat}>
+						<option>{this.props.cat}</option>
+						{this.state.catArray.map(cat => (
+							<option name={cat} key={cat + "=key"}>{cat}</option>
+						))}
+					</select>
 				</li>
 			);
 		} else if (this.props.name === "catList") {
@@ -76,7 +112,7 @@ class SettingsList extends Component {
 				return ( <div/> );
 			} else {
 				return (
-					<li className="list-group-item d-flex justify-content-between align-items-center">
+					<li className="url-list-full list-group-item d-flex justify-content-between align-items-center">
 						{this.props.cat}
 						<button
 							name={this.props.cat}

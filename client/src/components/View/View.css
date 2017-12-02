@@ -172,3 +172,21 @@
 	font-family: 'Chelsea Market', cursive;
 }
 
+.url-list-full {
+	height: 5rem;
+	font-size: 20px;
+}
+
+.url-list-select {
+	float: right;
+	width: 15rem;
+	padding: 0px;
+	margin: 0px;
+	height: 3rem;
+	margin-right: 10rem;
+}
+
+#save-changes-btn {
+	
+}
+

@@ -43,7 +43,7 @@ class LoginModal extends Component {
 			.then(res => {
 				console.log(res);
 				document.cookie = `username=${res.data.username}; path=/`;
-				document.cookie = `key=${res.data._id}; path=/`;
+				document.cookie = `session=${res.data.password}; path=/`;
 				this.props.update();
 				this.clearForm();
 				this.closeModal();

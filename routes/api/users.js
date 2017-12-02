@@ -22,4 +22,7 @@ router.route("/delete")
 router.route("/remcat")
 	.put(dbControl.deleteCat);
 
+router.route("/chgcat")
+	.put(dbControl.changeCat);
+
 module.exports = router;

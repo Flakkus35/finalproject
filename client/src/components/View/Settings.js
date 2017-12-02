@@ -3,6 +3,7 @@ import { Col, Row } from "../Grid";
 import SettingsList from "./SettingsList";
 import "./View.css";
 import API from "../../util/API";
+/* global $ */
 
 class Settings extends Component {
 	state = {
@@ -12,7 +13,9 @@ class Settings extends Component {
 		urlArray: this.props.urlkeys,
 		catArray: this.props.cats,
 		urlCatArray: this.props.urlcats,
-		catChoice: "None"
+		catChoice: "None",
+		changed: false,
+		changedUrls: []
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -57,7 +60,7 @@ class Settings extends Component {
 			console.log(this.state.urlOption);
 			const tempUrl = ("http://" + this.state.urlInput);
 			API.addUrl({
-				_id: this.state.userKey,
+				session: this.state.userKey,
 				url: tempUrl,
 				cat: this.state.catChoice
 			})
@@ -78,7 +81,7 @@ class Settings extends Component {
 		event.preventDefault();
 		if (this.state.catInput) {
 			API.addCat({
-				_id: this.state.userKey,
+				session: this.state.userKey,
 				cat: this.state.catInput
 			})
 			.then(res => {
@@ -108,22 +111,74 @@ class Settings extends Component {
 		console.log(title);
 	}
 
+	setChanges = urlObject => {
+		urlObject.forEach(object => {
+			if (object.isChanged) {
+				return this.setState({
+					changed: true,
+					changedUrls: urlObject
+				});
+			}
+		})
+	}
+
+	testChange() {
+		if (this.state.changed) {
+			return (
+				<button 
+					className="btn btn-success" 
+					id="save-changes-btn" 
+					type="button"
+					onClick={this.saveChanges}
+				>
+					Save Changes
+				</button>
+			);
+		} else {
+			return ( <div /> );
+		}
+	}
+
+	saveChanges = event => {
+		event.preventDefault();
+		console.log(this.state.changedUrls);
+		this.state.changedUrls.forEach(object => {
+			if (object.isChanged) {
+				console.log('changed');
+			}
+		})
+	}
+
+	placeholder() {
+		<a 
+			href="javascript:(function() {
+				var d=document.createElement('script');
+				d.src= 'https://code.jquery.com/jquery-3.2.1.min.js';
+				d.onload = function() {
+					$.ajax({
+						url: 'http://localhost:3000/api/user/addurl',
+						dataType: 'jsonp',
+						data: {
+							url: window.location.href
+						},
+						type: 'PUT',
+						success: function(data) {
+							console.log(data)
+						}
+					})
+				};
+				document.getElementsByTagName('head')[0].appendChild(d);
+			}())"
+			value={this.state.userKey}
+		>
+			Make Waypoint
+		</a>
+	}
+
 	render() {
 		return (
 			<div className="card">
 				<div className="card-body">
-				
-				<a 
-					href="javascript:(function() {
-						if (window.location.href === 'http://localhost:3000/') {
-							console.log(window.clipboardData);
-						} else {
-							var node=document.createElement('textarea'),selection=document.getSelection();node.textContent=window.location.href,document.body.appendChild(node),selection.removeAllRanges(),node.select(),document.execCommand('copy'),selection.removeAllRanges(),document.body.removeChild(node);
-						}
-					})()"
-				>
-					Make Waypoint
-				</a>
 					<div id="add-url">	
 						<h4 className="setting-title">Add New Link</h4>
 						<Row>
@@ -190,10 +245,13 @@ class Settings extends Component {
 															key={url + "=urlkey"} 
 															urlkey={this.state.urlArray[index]}
 															userkey={this.props.user}
-															update={this.props.update} 
+															update={this.props.update}
+															fullUrls={this.props.fullUrls}
+															save={this.setChanges.bind(this)}
 														/>
 													))}
 												</ul>
+												{this.testChange()}
 											</div>
 										</div>
 									</div>

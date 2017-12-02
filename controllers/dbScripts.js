@@ -30,26 +30,30 @@ module.exports = {
 	addNewCat: function(req, res) {
 		console.log(req.body);
 		db.User
-			.findByIdAndUpdate(req.body._id, {$push: { "cat": req.body.cat }}, { new: true })
+			.findOneAndUpdate({ password: req.body.session }, {$push: { "cat": req.body.cat }}, { new: true })
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.json(err));
 	},
 	pushNewUrl: function(req, res) {
 		console.log(req.body);
 		db.User
-			.findByIdAndUpdate(req.body._id, {$push: { "links": { "url": req.body.url, "cat": req.body.cat}}}, {new: true})
+			.findOneAndUpdate({ password: req.body.session }, {$push: { "links": { "url": req.body.url, "cat": req.body.cat}}}, {new: true})
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.json(err));
 	},
 	deleteCat: function(req, res) {
 		console.log(req.body);
 		db.User
-			.findByIdAndUpdate(req.body._id, {$pull: { "cat": req.body.cat }}, { new: true })
+			.findOneAndUpdate({ password: req.body.session }, {$pull: { "cat": req.body.cat }}, { new: true })
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.json(err));
 	},
 	changeCat: function(req, res) {
-
+		console.log(req.body);
+		db.User
+			.findOneAndUpdate({ password: req.body.userkey }, {$set: { "links": { "_id": req.body.url_id, "cat": req.body.cat}}}, { new: true })
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.json(err));
 	},
 	removeFromCat: function(req, res) {
 		
@@ -57,15 +61,18 @@ module.exports = {
 	findUrls: function(req, res) {
 		console.log(req.body);
 		db.User
-			.findById(req.body._id)
+			.findOne({ password: req.body.session})
 			.then(dbUser => res.json(dbUser))
 			.catch(err => res.json(err));
 	},
 	removeUrl: function(req, res) {
 		console.log(req.body);
 		db.User
-			.findByIdAndUpdate(req.body.user_id, {$pull: { "links": { "_id": req.body.url_id }}}, {new: true})
-			.then(dbModel => res.json(dbModel))
+			.findOneAndUpdate({ password: req.body.session }, {$pull: { "links": { "_id": req.body.url_id }}}, {new: true})
+			.then(dbModel => {
+				console.log(dbModel);
+				res.json(dbModel);
+			})
 			.catch(err => res.json(err));
 	},
 	testFind: function(req, res) {

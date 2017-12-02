@@ -95,6 +95,7 @@ class View extends Component {
 					cats={this.props.cats}
 					urlcats={this.props.urlcats}
 					bookmark={this.makeWaypoint.bind(this)}
+					fullUrls={this.props.fullUrls}
 				/>
 			);
 		}

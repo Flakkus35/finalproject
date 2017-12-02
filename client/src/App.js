@@ -14,13 +14,14 @@ class App extends Component {
         super(props);
         this.state = {
             user: "",
-            key: "",
+            session: "",
             page: "",
             urlArray: [],
             urlCatArray: [],
             urlKeyArray: [],
             catArray: [],
-            count: 0
+            count: 0,
+            fullUrls: []
         }
     };
 
@@ -34,9 +35,9 @@ class App extends Component {
 
     // Grab all urls from logged in user
     loadUrls() {
-        console.log(this.state.key);
+        console.log(this.state.session);
         API.findUrls({
-            _id: this.state.key
+            session: this.state.session
         })
         .then(res => {
             console.log(res);
@@ -44,6 +45,7 @@ class App extends Component {
             let tempUrlKeyArr = [];
             let tempCatUrlArr = [];
             let tempCatArr = ["None", "Home"];
+            let tempUrlObj = [];
             let tempCount = 0;
             console.log(res.data);
             for (var i = 0; i < res.data.links.length; i++) {
@@ -61,6 +63,12 @@ class App extends Component {
                         tempCount++;
                     }
                 }
+                tempUrlObj.push({
+                    url: res.data.links[i].url,
+                    url_id: res.data.links[i]._id,
+                    cat: res.data.links[i].cat,
+                    isChanged: false
+                });
             }
             for (var j = 0; j < res.data.cat.length; j++) {
                 tempCatArr.push(res.data.cat[j]);
@@ -70,11 +78,13 @@ class App extends Component {
                 urlCatArray: tempCatUrlArr,
                 urlKeyArray: tempUrlKeyArr,
                 catArray: tempCatArr,
+                fullUrls: tempUrlObj,
                 count: tempCount
             },
             () => {
                 console.log(this.state.urlArray);
                 console.log(this.state.catArray);
+                console.log(this.state.fullUrls);
             });
         })
         .catch(err => console.log(err));
@@ -85,11 +95,11 @@ class App extends Component {
         var temp = document.cookie;
         console.log(temp);
         var updatedUser = this.getCookie("username");
-        var updatedKey = this.getCookie("key");
+        var updatedSession = this.getCookie("session");
         // console.log(updatedUser);
         this.setState({
             user: updatedUser,
-            key: updatedKey,
+            session: updatedSession,
             page: "Home"
         },
         () => this.loadUrls());
@@ -119,10 +129,10 @@ class App extends Component {
     // Logs user out
     logout() {
         document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-        document.cookie = "key=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
         this.setState({
             user: "",
-            key: "",
+            session: "",
             page: "Home",
             catArray: []
         });
@@ -173,13 +183,14 @@ class App extends Component {
                             { this.state.user 
                                 ?    <View 
                                         view={this.state.page} 
-                                        userkey={this.state.key} 
+                                        userkey={this.state.session} 
                                         urls={this.state.urlArray}
                                         cats={this.state.catArray} 
                                         count={this.state.count}
                                         update={this.loadUrls.bind(this)}
                                         urlkeys={this.state.urlKeyArray}
                                         urlcats={this.state.urlCatArray}
+                                        fullUrls={this.state.fullUrls}
                                      />
                                 :    <View view="" />
                             }

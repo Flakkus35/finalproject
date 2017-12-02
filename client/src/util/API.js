@@ -35,5 +35,9 @@ export default {
 	removeCat: function(catData) {
 		console.log(catData);
 		return axios.put("/api/user/remcat", catData);
+	},
+	changeCat: function(urlData) {
+		console.log(urlData);
+		return axios.put("/api/user/chgcat", urlData);
 	}
 }

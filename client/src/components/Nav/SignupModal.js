@@ -47,7 +47,7 @@ class SignupModal extends Component {
 					console.log(JSON.stringify(test));
 					console.log(res);
 					document.cookie = `username=${res.data.username}; path=/`;
-					document.cookie = `key=${res.data._id}; path=/`;
+					document.cookie = `session=${res.data._id}; path=/`;
 					this.props.update();
 					this.clearForm();
 					this.closeModal();
