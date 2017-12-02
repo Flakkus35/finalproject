@@ -62,7 +62,14 @@ class SettingsList extends Component {
 			session: this.props.userkey,
 			cat: this.props.cat
 		})
-		.then(res => this.props.update())
+		.then(res => {
+			API.defaultCat({
+				session: this.props.userkey,
+				delCat: this.props.cat
+			})
+			.catch(err => console.log(err))
+		})
+		.then(res2 => this.props.update())
 		.catch(err => console.log(err));
 	};
 

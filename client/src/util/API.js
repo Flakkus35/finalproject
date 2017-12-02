@@ -39,5 +39,9 @@ export default {
 	changeCat: function(urlData) {
 		console.log(urlData);
 		return axios.put("/api/user/chgcat", urlData);
+	},
+	defaultCat: function(urlData) {
+		console.log(urlData);
+		return axios.put("/api/user/defcat", urlData);
 	}
 }

@@ -56,7 +56,11 @@ module.exports = {
 			.catch(err => res.json(err));
 	},
 	removeFromCat: function(req, res) {
-		
+		console.log(req.body);
+		db.User 
+			.updateMany({ password: req.body.session, "links.cat": req.body.delCat}, {$set: { "links.$.cat": "None"}}, { new: true })
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.json(err));
 	},
 	findUrls: function(req, res) {
 		console.log(req.body);
