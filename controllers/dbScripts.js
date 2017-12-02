@@ -51,7 +51,7 @@ module.exports = {
 	changeCat: function(req, res) {
 		console.log(req.body);
 		db.User
-			.findOneAndUpdate({ password: req.body.userkey }, {$set: { "links": { "_id": req.body.url_id, "cat": req.body.cat}}}, { new: true })
+			.findOneAndUpdate({ password : req.body.userkey, "links._id": req.body.url_id }, {$set: { "links.$.cat": req.body.cat }}, { new: true })
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.json(err));
 	},

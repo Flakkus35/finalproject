@@ -36,6 +36,10 @@ class SettingsList extends Component {
 		}
 	}
 
+	componentDidMount() {
+		console.log(this.state.fullUrls);
+	}
+
 	handleFormSubmit = event => {
 		event.preventDefault();
 		const urlkey = event.target.getAttribute("name");
@@ -77,13 +81,13 @@ class SettingsList extends Component {
 			} 
 		});
 		console.log(tempFullUrls);
-		// API.changeCat({
-		// 	userkey: this.props.userkey,
-		// 	url_id: chosenUrlKey,
-		// 	cat: chosenCat
-		// })
-		// .then(res => console.log(res))
-		// .catch(err => console.log(err));
+		API.changeCat({
+			userkey: this.props.userkey,
+			url_id: chosenUrlKey,
+			cat: chosenCat
+		})
+		.then(res => console.log(res))
+		.catch(err => console.log(err));
 	}
 
 	render() {
