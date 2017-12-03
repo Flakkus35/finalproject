@@ -186,7 +186,16 @@
 	margin-right: 10rem;
 }
 
-#save-changes-btn {
-	
+.info-body {
+	background: white;
+	box-shadow: 5px 5px 5px #888888;
+	overflow-y: auto;
+	margin-top: 20px;
+	height: 65rem;
+}
+
+.info-text {
+	margin-left: 20px;
+	margin-right: 20px;
 }
 

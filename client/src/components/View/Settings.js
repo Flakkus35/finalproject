@@ -58,7 +58,12 @@ class Settings extends Component {
 		if (this.state.urlInput) {
 			console.log(this.state.userKey);
 			console.log(this.state.urlOption);
-			const tempUrl = ("http://" + this.state.urlInput);
+			let tempUrl;
+			if (this.state.urlInput.includes("http://") || this.state.urlInput.includes("https://")) {
+				tempUrl = this.state.urlInput;
+			} else {
+				tempUrl = ("http://" + this.state.urlInput);
+			}
 			API.addUrl({
 				session: this.state.userKey,
 				url: tempUrl,

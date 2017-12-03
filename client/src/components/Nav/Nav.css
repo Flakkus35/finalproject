@@ -39,12 +39,13 @@
 }
 
 #login-btn, #user-btn {
-	margin-top: 7px;
-	margin-right: 10px;
-	margin-left: 10px;
 	padding: 10px;
 	width: 200px;
 	font-size: 25px;
+	height: 7.9rem;
+	background: #ad581a;
+	border: none;
+	border-radius: 0;
 }
 
 .login-img {

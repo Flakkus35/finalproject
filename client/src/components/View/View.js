@@ -4,6 +4,7 @@ import { Container, Col, Row } from "../Grid";
 import LinkBlock from "./LinkBlock";
 import Settings from "./Settings";
 import notFound from "../../util/images/no-view-map.png";
+import Info from "./Info";
 
 class View extends Component {
 	state = {
@@ -21,10 +22,16 @@ class View extends Component {
 
 	// Shows header based on login status
 	viewHeader() {
-		if (!this.state.page) {
-			return (
-				<div>Login to start adding sites</div>
-			);
+		if (!this.state.page || !this.props.userkey) {
+			if (this.state.page === "Info") {
+				return (
+					<div>Getting Started</div>
+				);
+			} else {
+				return (
+					<div>Login to start adding sites</div>
+				);
+			}
 		} else {
 			return (
 				<div>{this.state.page}</div>
@@ -55,7 +62,22 @@ class View extends Component {
 	
 	// Returns chosen page
 	viewPage() {
-		if (this.state.page !== "Settings" && (!this.props.urls || !this.props.urls[0])) {
+		console.log(this.state.page);
+		if (this.state.page == "Info") {
+			return (
+				<div className="card">
+					<div className="card-body">
+						<Row>
+							<Col size="md-12">
+								<div className="info-view">
+									<Info />
+								</div>
+							</Col>
+						</Row>
+					</div>
+				</div>
+			);
+		} else if (this.state.page !== "Settings" && (!this.props.urls || !this.props.urls[0])) {
 			return (
 				<div className="card">
 					<div className="card-body">

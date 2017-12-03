@@ -48,30 +48,34 @@ class App extends Component {
             let tempUrlObj = [];
             let tempCount = 0;
             console.log(res.data);
-            for (var i = 0; i < res.data.links.length; i++) {
-                if (this.state.page === "Settings") {
-                    tempUrlArr.push(res.data.links[i].url);
-                    tempUrlKeyArr.push(res.data.links[i]._id);
-                    tempCatUrlArr.push(res.data.links[i].cat);
-                    tempCount++;
-                }
-                if (res.data.links[i].cat === this.state.page) {
-                    if (tempUrlArr.length < 8) {
+            if (res.data) {
+                for (var i = 0; i < res.data.links.length; i++) {
+                    if (this.state.page === "Settings") {
                         tempUrlArr.push(res.data.links[i].url);
                         tempUrlKeyArr.push(res.data.links[i]._id);
                         tempCatUrlArr.push(res.data.links[i].cat);
                         tempCount++;
                     }
+                    if (res.data.links[i].cat === this.state.page) {
+                        if (tempUrlArr.length < 8) {
+                            tempUrlArr.push(res.data.links[i].url);
+                            tempUrlKeyArr.push(res.data.links[i]._id);
+                            tempCatUrlArr.push(res.data.links[i].cat);
+                            tempCount++;
+                        }
+                    }
+                    tempUrlObj.push({
+                        url: res.data.links[i].url,
+                        url_id: res.data.links[i]._id,
+                        cat: res.data.links[i].cat,
+                        isChanged: false
+                    });
                 }
-                tempUrlObj.push({
-                    url: res.data.links[i].url,
-                    url_id: res.data.links[i]._id,
-                    cat: res.data.links[i].cat,
-                    isChanged: false
-                });
-            }
-            for (var j = 0; j < res.data.cat.length; j++) {
-                tempCatArr.push(res.data.cat[j]);
+                for (var j = 0; j < res.data.cat.length; j++) {
+                    tempCatArr.push(res.data.cat[j]);
+                }
+            } else {
+                tempCatArr = [];
             }
             this.setState({
                 urlArray: tempUrlArr,
@@ -85,6 +89,7 @@ class App extends Component {
                 console.log(this.state.urlArray);
                 console.log(this.state.catArray);
                 console.log(this.state.fullUrls);
+                console.log(this.state.page);
             });
         })
         .catch(err => console.log(err));
@@ -149,6 +154,7 @@ class App extends Component {
     // Change pages
     navigate = event => {
         const name = (event.target.getAttribute("value"));
+        console.log(name);
         if (this.state.page === name) {
             return console.log("Already at " + name);
         } else {
@@ -180,20 +186,17 @@ class App extends Component {
                 			/>
                 		</Col>
                 		<Col size="md-10">
-                            { this.state.user 
-                                ?    <View 
-                                        view={this.state.page} 
-                                        userkey={this.state.session} 
-                                        urls={this.state.urlArray}
-                                        cats={this.state.catArray} 
-                                        count={this.state.count}
-                                        update={this.loadUrls.bind(this)}
-                                        urlkeys={this.state.urlKeyArray}
-                                        urlcats={this.state.urlCatArray}
-                                        fullUrls={this.state.fullUrls}
-                                     />
-                                :    <View view="" />
-                            }
+                            <View 
+                                view={this.state.page} 
+                                userkey={this.state.session} 
+                                urls={this.state.urlArray}
+                                cats={this.state.catArray} 
+                                count={this.state.count}
+                                update={this.loadUrls.bind(this)}
+                                urlkeys={this.state.urlKeyArray}
+                                urlcats={this.state.urlCatArray}
+                                fullUrls={this.state.fullUrls}
+                            /> 
                         </Col>
                 	</Row>
                 </Container>

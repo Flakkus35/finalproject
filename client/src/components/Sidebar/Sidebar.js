@@ -48,8 +48,13 @@ class Sidebar extends Component {
 						</ul>
 						<ul className="list-group list-group-flush sidebar-body">
 							<li className="list-group-item list-group-flush">
-								<p id="help-page" className="cat-header">
-									How To Use
+								<p 
+									id="help-page" 
+									className="cat-header" 
+									value="Info"
+									onClick={this.props.navigate}
+								>
+									Getting Started
 								</p>
 							</li>
 						</ul>

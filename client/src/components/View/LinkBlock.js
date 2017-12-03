@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col } from "../Grid";
-import noView from "../../util/images/no-view-map.png";
+import noView from "../../util/images/anchor.png";
 
 class LinkBlock extends Component {
 	state = {

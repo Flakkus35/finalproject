@@ -30,14 +30,11 @@ class SettingsList extends Component {
 					tempCats.push(cat);
 				}
 			});
+			console.log(tempCats);
 			this.setState({
 				catArray: tempCats
 			});
 		}
-	}
-
-	componentDidMount() {
-		console.log(this.state.fullUrls);
 	}
 
 	handleFormSubmit = event => {
