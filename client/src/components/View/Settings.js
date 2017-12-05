@@ -15,7 +15,9 @@ class Settings extends Component {
 		urlCatArray: this.props.urlcats,
 		catChoice: "None",
 		changed: false,
-		changedUrls: []
+		changedUrls: [],
+		viewChoice: "1",
+		fullUrls: this.props.fullUrls
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -60,23 +62,47 @@ class Settings extends Component {
 			console.log(this.state.urlOption);
 			let tempUrl;
 			if (this.state.urlInput.includes("http://") || this.state.urlInput.includes("https://")) {
-				tempUrl = this.state.urlInput;
+				if (this.state.urlInput.includes(".com")) {	
+					tempUrl = this.state.urlInput;
+				} else {
+					tempUrl = (this.state.urlInput + ".com");
+				}
 			} else {
-				tempUrl = ("http://" + this.state.urlInput);
+				if (this.state.urlInput.includes(".com")) {
+					tempUrl = ("http://" + this.state.urlInput);
+				} else {
+					tempUrl = ("http://" + this.state.urlInput + ".com");
+				}
 			}
-			API.addUrl({
-				session: this.state.userKey,
-				url: tempUrl,
-				cat: this.state.catChoice
-			})
-			.then(res => {
-				this.clearForm();
-				this.props.update()
-			})
-			.catch(err => {
-				this.clearForm();
-				console.log(err)
-			});
+			if (this.state.viewChoice === "3") {
+				API.addUrl({
+					session: this.state.userKey,
+					url: tempUrl,
+					cat: "Social"
+				})
+				.then(res => {
+					this.clearForm();
+					this.props.update()
+				})
+				.catch(err => {
+					this.clearForm();
+					console.log(err)
+				});
+			} else {
+				API.addUrl({
+					session: this.state.userKey,
+					url: tempUrl,
+					cat: this.state.catChoice
+				})
+				.then(res => {
+					this.clearForm();
+					this.props.update()
+				})
+				.catch(err => {
+					this.clearForm();
+					console.log(err)
+				});
+			}
 		} else {
 			return alert("Enter a link to add first!");
 		}
@@ -178,14 +204,31 @@ class Settings extends Component {
 		>
 			Make Waypoint
 		</a>
+	};
+
+	switchView = event => {
+		if (this.state.viewChoice !== event.target.value) {
+			this.setState({
+				viewChoice: event.target.value
+			});
+		}
 	}
 
-	render() {
-		return (
-			<div className="card">
-				<div className="card-body">
+	renderSocial = () => {
+
+	}
+
+	componentWillMount() {
+		console.log(this.props.socialUrls);
+	}
+
+	renderView = event => {
+		let btnChoice = this.state.viewChoice;
+		if (btnChoice === "1") {
+			return (
+				<div id="settings-list">
 					<div id="add-url">	
-						<h4 className="setting-title">Add New Link</h4>
+						<h4 className="setting-title">Add New Waypoint</h4>
 						<Row>
 							<form className="form-group">
 								<Col size="md-1">
@@ -226,20 +269,20 @@ class Settings extends Component {
 					</div>
 					<Row>
 						<Col size="md-12">
-							<div id="accordion" role="tablist">
-								<div className="card" id="settings-list">
+							<div>
+								<div className="card">
 									<div id="inner-settings-list">
-										<div className="card-header" role="tab" id="headingOne">
+										<div className="card-header">
 											<h4 className="mb-0">
-												<a className="list-header" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-													Site List
+												<p className="setting-title">
+													All Waypoints
 												<span className="badge badge-secondary array-total">{this.state.urlArray.length}</span>
-												</a>
+												</p>
 											</h4>
 										</div>
-										<div id="collapseOne" className="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+										<div>
 											<div className="card-body">
-												<ul className="list-group">
+												<ul className="list-group list-urls">
 													{this.props.urls.map((url, index) => (
 														<SettingsList 
 															name="urlList"
@@ -261,11 +304,19 @@ class Settings extends Component {
 										</div>
 									</div>
 								</div>
+							</div>
+							<div>
+								<p id="foot-note">* Any waypoint with "None" as their plan will not be available for view</p>
 							</div>	
 						</Col>
 					</Row>
+				</div>
+			);
+		} else if (btnChoice === "2") {
+			return (
+				<div id="cat-list">
 					<div id="add-cat">	
-						<h4 className="setting-title">Add New Category</h4>
+						<h4 className="setting-title">Add New Plan</h4>
 						<Row>
 							<form className="form-group">
 								<Col size="md-3">
@@ -291,19 +342,19 @@ class Settings extends Component {
 					</div>
 					<Row>
 						<Col size="md-12">
-							<div id="accordion" role="tablist">
-								<div className="card" id="cat-list">
+							<div>
+								<div className="card">
 									<div id="inner-cat-list">
-										<div className="card-header" role="tab" id="headingTwo">
+										<div className="card-header">
 											<h4 className="mb-0">
-												<a className="list-header" data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-													Category List
+												<p className="setting-title">
+													All Plans
 												<span className="badge badge-secondary array-total">{this.state.catArray.length - 2}</span>
-												</a>
+												</p>
 											</h4>
 										</div>
-										<div id="collapseTwo" className="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-											<ul className="list-group">
+										<div>
+											<ul className="list-group list-urls">
 												{this.props.cats.map((cat, index) => (
 													<SettingsList 
 														name="catList"
@@ -319,7 +370,92 @@ class Settings extends Component {
 								</div>
 							</div>	
 						</Col>
-					</Row>		
+					</Row>
+				</div>
+			);
+		} else if (btnChoice === "3") {
+			return (
+				<div id="social-list">
+					<div id="add-url">	
+						<h4 className="setting-title">Add New Social Waypoint</h4>
+						<Row>
+							<form className="form-group">
+								<Col size="md-1">
+									<label htmlFor="url-input" id="url-tag" className="form-control">http://</label>
+								</Col>
+								<Col size="md-6">
+									<input 
+										type="text" 
+										className="form-control" 
+										id="urlInput"
+										value={this.state.urlInput}
+										onChange={this.handleInputChange} 
+									/>
+								</Col>
+								<Col size="md-2">
+									<button 
+										type="button"
+										className="btn btn-primary"
+										onClick={this.handleFormSubmit}
+									>
+									Add
+									</button>
+								</Col>
+							</form>
+						</Row>
+					</div>
+					<Row>
+						<Col size="md-12">
+							<div>
+								<div className="card">
+									<div id="inner-settings-list">
+										<div className="card-header">
+											<h4 className="mb-0">
+												<p className="setting-title">
+													All Social Waypoints
+												<span className="badge badge-secondary array-total">{this.props.socialUrls.length}</span>
+												</p>
+											</h4>
+										</div>
+										<div>
+											<div className="card-body">
+												<ul className="list-group">
+													{this.props.socialUrls.map((url, index) => (
+														<SettingsList 
+															name="socList"
+															url={url} 
+															total={index}
+															key={url + index + "=sockey"} 
+															urlkey={this.props.socialKeys[index]}
+															userkey={this.props.user}
+															update={this.props.update}
+															fullUrls={this.props.fullUrls}
+														/>
+													))}
+												</ul>
+												{this.testChange()}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>	
+						</Col>
+					</Row>
+				</div>
+			);
+		}
+	}
+
+	render() {
+		return (
+			<div className="card">
+				<div className="card-body">
+					<div id="btn-panel">
+						<button className="chg-btn" id="way-btn" onClick={this.switchView} type="button" value="1">Waypoints</button>
+						<button className="chg-btn" id="cat-btn" onClick={this.switchView} type="button" value="2">Plans</button>
+						<button className="chg-btn" id="soc-btn" onClick={this.switchView} type="button" value="3">Social</button>
+					</div>
+					{this.renderView()}		
 				</div>
 			</div>
 		);

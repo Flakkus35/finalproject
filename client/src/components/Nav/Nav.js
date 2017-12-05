@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Nav.css";
 import Login from "./Login";
 import cast from "../../util/images/castoff-favicon.png";
+import searchIcon from "../../util/images/search-icon.png";
 
 class Nav extends Component {
   state = {
@@ -60,13 +61,16 @@ class Nav extends Component {
                               value={this.state.googleInput} 
                               name="q"
                               autoComplete="on"
-                              onChange={this.handleInputChange} 
+                              onChange={this.handleInputChange}
+                              placeholder="Google"
                             />
-                            <input 
+                            <button 
                               id="google-search-btn" 
+                              className="btn"
                               type="submit" 
-                              value="Google Search"
-                            />
+                            ><img src={searchIcon} id="search-icon" height="25" width="25" alt="search" />
+                              Search 
+                            </button>
                           </td>
                         </tr>
                       </tbody>

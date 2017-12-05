@@ -5,7 +5,8 @@ import noView from "../../util/images/anchor.png";
 class LinkBlock extends Component {
 	state = {
 		url: this.props.urlname,
-		imgLink: this.props.shorturl
+		imgLink: this.props.shorturl,
+		shorturl: ""
 	};
 
 	// Sets default image if get logo fails
@@ -14,6 +15,23 @@ class LinkBlock extends Component {
 			imgLink: noView
 		})
 	};
+
+	componentWillMount() {
+		let temp = this.props.urlname;
+		let tempComplete = "";
+		if (temp.includes("https://")) {
+			temp = temp.split("https://");
+			var firstLetter = temp[1].charAt(0).toUpperCase();
+			temp = firstLetter + temp[1].slice(1)
+		} else if (temp.includes("http://")) {
+			temp = temp.split("http://");
+			var firstLetter = temp[1].charAt(0).toUpperCase();
+			temp = firstLetter + temp[1].slice(1)
+		}
+		this.setState({
+			shorturl: temp
+		});
+	}
 
 	render() {
 		return (
@@ -24,7 +42,7 @@ class LinkBlock extends Component {
 							<a href={this.state.url}><img className="url-image" src={this.state.imgLink} onError={this.handleImgFail.bind(this)} alt={this.state.url} /></a>
 						</div>
 						<div className="url-link-block">
-							<a href={this.state.url}>{this.state.url}</a>
+							<a href={this.state.url}>{this.state.shorturl}</a>
 						</div>
 					</div>
 				</Col>

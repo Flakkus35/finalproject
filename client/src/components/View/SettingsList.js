@@ -23,18 +23,6 @@ class SettingsList extends Component {
 				cat: nextProps.catkey
 			});
 		}
-		if (this.state.catArray !== nextProps.catArray) {
-			let tempCats = [];
-			nextProps.catArray.forEach(cat => {
-				if (cat !== this.props.cat) {
-					tempCats.push(cat);
-				}
-			});
-			console.log(tempCats);
-			this.setState({
-				catArray: tempCats
-			});
-		}
 	}
 
 	handleFormSubmit = event => {
@@ -109,7 +97,7 @@ class SettingsList extends Component {
 					</button>
 					<select className="form-control url-list-select" onChange={this.switchCat}>
 						<option>{this.props.cat}</option>
-						{this.state.catArray.map(cat => (
+						{this.props.catArray.filter(kat => kat !== this.props.cat).map(cat => (
 							<option name={cat} key={cat + "=key"}>{cat}</option>
 						))}
 					</select>
@@ -133,6 +121,20 @@ class SettingsList extends Component {
 					</li>
 				);
 			}
+		} else if (this.props.name === "socList") {
+			return (
+				<li className="url-list-full list-group-item d-flex justify-content-between align-items-center">
+					{this.props.url}
+					<button
+						name={this.props.urlkey}
+						className="btn btn-danger remove-url"
+						type="button"
+						onClick={this.handleFormSubmit}
+					>
+						X
+					</button>
+				</li>
+			);
 		}
 	};
 }

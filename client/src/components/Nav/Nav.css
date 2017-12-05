@@ -110,8 +110,19 @@
 #google-search-btn {
 	margin-left: 5px;
 	height: 4rem;
+	width: 15rem;
+	font-family: 'Boogaloo', cursive;
+	background: #000a8a;
+	color: white;
+	font-size: 20px;
+	z-index: 1;
 }
 
 #googleInput {
 	width: 50rem;
+}
+
+#search-icon {
+	z-index: 50;
+	float: right;
 }

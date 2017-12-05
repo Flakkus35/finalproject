@@ -20,8 +20,10 @@ class App extends Component {
             urlCatArray: [],
             urlKeyArray: [],
             catArray: [],
-            count: 0,
-            fullUrls: []
+            fullUrls: [],
+            socialUrls: [],
+            urlSocKey: [],
+            socNames: []
         }
     };
 
@@ -46,23 +48,28 @@ class App extends Component {
             let tempCatUrlArr = [];
             let tempCatArr = ["None", "Home"];
             let tempUrlObj = [];
-            let tempCount = 0;
+            let tempSocial = [];
+            let tempSocKey = [];
+            let finalSocial = [];
             console.log(res.data);
             if (res.data) {
                 for (var i = 0; i < res.data.links.length; i++) {
                     if (this.state.page === "Settings") {
-                        tempUrlArr.push(res.data.links[i].url);
-                        tempUrlKeyArr.push(res.data.links[i]._id);
-                        tempCatUrlArr.push(res.data.links[i].cat);
-                        tempCount++;
-                    }
-                    if (res.data.links[i].cat === this.state.page) {
+                        if (res.data.links[i].cat !== "Social") {
+                            tempUrlArr.push(res.data.links[i].url);
+                            tempUrlKeyArr.push(res.data.links[i]._id);
+                            tempCatUrlArr.push(res.data.links[i].cat);
+                        }
+                    } else if (res.data.links[i].cat === this.state.page) {
                         if (tempUrlArr.length < 8) {
                             tempUrlArr.push(res.data.links[i].url);
                             tempUrlKeyArr.push(res.data.links[i]._id);
                             tempCatUrlArr.push(res.data.links[i].cat);
-                            tempCount++;
                         }
+                    }
+                    if (res.data.links[i].cat === "Social") {
+                        tempSocial.push(res.data.links[i].url);
+                        tempSocKey.push(res.data.links[i]._id);
                     }
                     tempUrlObj.push({
                         url: res.data.links[i].url,
@@ -77,19 +84,35 @@ class App extends Component {
             } else {
                 tempCatArr = [];
             }
+            for (var k = 0; k < tempSocial.length; k++) {
+                console.log(tempSocial[k])
+                if (tempSocial[k].includes("http://")) {
+                    let tempSplit = tempSocial[k].replace("http://", '').replace(".com", '');
+                    console.log(tempSplit);
+                    let tempCap = tempSplit.charAt(0).toUpperCase();
+                    tempSplit = tempCap + tempSplit.slice(1);
+                    finalSocial.push(tempSplit);
+                } else {
+                    let tempSplit = tempSocial[k].replace("https://", '').replace(".com", '');
+                    let tempCap = tempSplit.charAt(0).toUpperCase();
+                    tempSplit = tempCap + tempSplit.slice(1);
+                    finalSocial.push(tempSplit);
+                }
+            }
             this.setState({
                 urlArray: tempUrlArr,
                 urlCatArray: tempCatUrlArr,
                 urlKeyArray: tempUrlKeyArr,
                 catArray: tempCatArr,
                 fullUrls: tempUrlObj,
-                count: tempCount
+                socialUrls: tempSocial,
+                urlSocKey: tempSocKey,
+                socNames: finalSocial
             },
             () => {
-                console.log(this.state.urlArray);
-                console.log(this.state.catArray);
-                console.log(this.state.fullUrls);
-                console.log(this.state.page);
+                console.log(this.state.socialUrls);
+                console.log(this.state.urlSocKey);
+                console.log(this.state.socNames);
             });
         })
         .catch(err => console.log(err));
@@ -183,6 +206,9 @@ class App extends Component {
                                 navigate={this.navigate.bind(this)}
                                 cats={this.state.catArray}
                                 name={this.state.page}
+                                socialUrls={this.state.socialUrls}
+                                socialKeys={this.state.urlSocKey}
+                                socNames={this.state.socNames}
                 			/>
                 		</Col>
                 		<Col size="md-10">
@@ -196,6 +222,8 @@ class App extends Component {
                                 urlkeys={this.state.urlKeyArray}
                                 urlcats={this.state.urlCatArray}
                                 fullUrls={this.state.fullUrls}
+                                socialUrls={this.state.socialUrls}
+                                socialKeys={this.state.urlSocKey}
                             /> 
                         </Col>
                 	</Row>

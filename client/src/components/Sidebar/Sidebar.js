@@ -15,7 +15,7 @@ class Sidebar extends Component {
 				<div className="sidebar-link">
 					<div className="card group-card">
 						<div className="card-header group-card-header">
-							Pages
+							Plans
 						</div>
 						<ul className="list-group list-group-flush sidebar-body">
 							{this.props.cats.map(cat => (
@@ -30,21 +30,14 @@ class Sidebar extends Component {
 							Social
 						</div>
 						<ul className="list-group list-group-flush sidebar-body">
-							<div className="start-cat">
-								<li className="list-group-item list-group-flush side-cat-list" onClick={this.goToSocial}>
-									<p id="facebook-link" className="cat-header" href="http://facebook.com">Facebook</p>
-								</li>
-							</div>
-							<div className="start-cat">
-								<li className="list-group-item list-group-flush side-cat-list" onClick={this.goToSocial}>
-									<p id="twitter-link" className="cat-header" href="http://twitter.com">Twitter</p>
-								</li>
-							</div>
-							<div className="start-cat">
-								<li className="list-group-item list-group-flush side-cat-list" onClick={this.goToSocial}>
-									<p id="google-link" className="cat-header" href="http://google.com">Google</p>
-								</li>
-							</div>
+							{this.props.socialUrls.map((soc, index) => (
+								<Catlist
+									group="Social"
+									goto={soc}
+									key={soc + "=key"}
+									name={this.props.socNames[index]}
+								/>
+							))}
 						</ul>
 						<ul className="list-group list-group-flush sidebar-body">
 							<li className="list-group-item list-group-flush">

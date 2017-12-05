@@ -22,7 +22,7 @@ class View extends Component {
 
 	// Shows header based on login status
 	viewHeader() {
-		if (!this.state.page || !this.props.userkey) {
+		if (this.state.page === "Info") {
 			if (this.state.page === "Info") {
 				return (
 					<div>Getting Started</div>
@@ -33,9 +33,15 @@ class View extends Component {
 				);
 			}
 		} else {
-			return (
-				<div>{this.state.page}</div>
-			);
+			if (!this.props.userkey) {
+				return (
+					<div>Login to start adding sites</div>
+				);
+			} else {
+				return (
+					<div>{this.state.page}</div>
+				);
+			}
 		}
 	}
 
@@ -118,6 +124,8 @@ class View extends Component {
 					urlcats={this.props.urlcats}
 					bookmark={this.makeWaypoint.bind(this)}
 					fullUrls={this.props.fullUrls}
+					socialUrls={this.props.socialUrls}
+					socialKeys={this.props.socialKeys}
 				/>
 			);
 		}
