@@ -74,7 +74,7 @@ class SignupModal extends Component {
 				<div className="modal-dialog" role="document">
 					<div className="modal-content">
 						<div className="modal-header">
-							<h5 className="modal-title">Signup</h5>
+							<h3 className="modal-title">Signup</h3>
 							<button type="button" className="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -117,7 +117,7 @@ class SignupModal extends Component {
 						</div>
 						<div className="modal-footer">
 							<button 
-								className="btn btn-success mr-auto"
+								className="btn mr-auto modal-btn"
 								id="signup-btn"
 								data-toggle="modal"
 								data-target="#signup-modal, #login-modal"
@@ -125,7 +125,7 @@ class SignupModal extends Component {
 							Back to login
 							</button>
 							<button 
-								className="btn btn-primary"
+								className="btn modal-btn"
 								onClick={this.handleFormSubmit}
 								disabled={!(this.state.signupUser && this.state.signupPassword)}
 							>

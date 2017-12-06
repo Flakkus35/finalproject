@@ -6,7 +6,8 @@ import API from "../../util/API";
 class LoginModal extends Component {
 	state = {
 		usernameInput: "",
-		passwordInput: ""
+		passwordInput: "",
+		remember: false
 	};
 
 	handleInputChange = event => {
@@ -35,15 +36,25 @@ class LoginModal extends Component {
 
 	handleFormSubmit = event => {
 		event.preventDefault();
+		console.log(this.state.remember);
 		if (this.state.usernameInput && this.state.passwordInput) {
 			API.loginUser({
 				username: this.state.usernameInput,
 				password: this.state.passwordInput
 			})
 			.then(res => {
-				console.log(res);
-				document.cookie = `username=${res.data.username}; path=/`;
-				document.cookie = `session=${res.data.password}; path=/`;
+				if (this.state.remember) {
+					let currentDate = new Date();
+					currentDate.setTime(currentDate.getTime() + (30*24*60*60*1000));
+					let expires = currentDate.toGMTString();
+					console.log(expires);
+					document.cookie = `username=${res.data.username}; expires=${expires}; path=/`;
+					document.cookie = `session=${res.data.password}; expires=${expires}; path=/`;
+				} else {
+					document.cookie = `username=${res.data.username}; path=/`;
+					document.cookie = `session=${res.data.password}; path=/`;
+				}
+				
 				this.props.update();
 				this.clearForm();
 				this.closeModal();
@@ -56,7 +67,18 @@ class LoginModal extends Component {
 			alert(`Please enter both a username and password`);
 			this.clearForm();
 		}
+	}
 
+	switchCheck = event => {
+		if (this.state.remember) {
+			this.setState({
+				remember: false
+			});
+		} else {
+			this.setState({
+				remember: true
+			});
+		}
 	}
 
 	render() {
@@ -65,7 +87,7 @@ class LoginModal extends Component {
 				<div className="modal-dialog" role="document">
 					<div className="modal-content">
 						<div className="modal-header">
-							<h5 className="modal-title">Login</h5>
+							<h3 className="modal-title">Login</h3>
 							<button type="button" className="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -95,9 +117,15 @@ class LoginModal extends Component {
 								</div>
 							</form>
 						</div>
+						<div className="form-check">
+							<label className="form-check-label remember-check">
+								<input type="checkbox" className="form-check-input" id="checkbox-btn" onClick={this.switchCheck}/>
+								Remember me
+							</label>
+						</div>
 						<div className="modal-footer">
 							<button 
-								className="btn btn-success mr-auto"
+								className="btn mr-auto modal-btn"
 								id="signup-btn"
 								data-toggle="modal"
 								data-target="#signup-modal, #login-modal"
@@ -105,7 +133,7 @@ class LoginModal extends Component {
 							Sign Up
 							</button>
 							<button 
-								className="btn btn-primary"
+								className="btn modal-btn"
 								onClick={this.handleFormSubmit}
 							>
 							Submit

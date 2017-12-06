@@ -69,7 +69,7 @@ class View extends Component {
 	// Returns chosen page
 	viewPage() {
 		console.log(this.state.page);
-		if (this.state.page == "Info") {
+		if (this.state.page === "Info") {
 			return (
 				<div className="card">
 					<div className="card-body">

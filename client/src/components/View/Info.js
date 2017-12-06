@@ -12,7 +12,7 @@ class Info extends Component {
 					fully-customizable to what you are looking for! You can save 
 					up to 8 links(waypoints) to sites in however many groupings
 					(plans) as you wish. Once you are set just click the plan you 
-					wish to see then click onthe waypoint you wish to go to. To 
+					wish to see then click on the waypoint you wish to go to. To 
 					get started login with your account or sign up as a new user.
 					</p>
 				</div>

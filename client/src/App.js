@@ -81,23 +81,23 @@ class App extends Component {
                 for (var j = 0; j < res.data.cat.length; j++) {
                     tempCatArr.push(res.data.cat[j]);
                 }
+                for (var k = 0; k < tempSocial.length; k++) {
+                    console.log(tempSocial[k])
+                    if (tempSocial[k].includes("http://")) {
+                        let tempSplit = tempSocial[k].replace("http://", '').replace(".com", '');
+                        console.log(tempSplit);
+                        let tempCap = tempSplit.charAt(0).toUpperCase();
+                        tempSplit = tempCap + tempSplit.slice(1);
+                        finalSocial.push(tempSplit);
+                    } else {
+                        let tempSplit = tempSocial[k].replace("https://", '').replace(".com", '');
+                        let tempCap = tempSplit.charAt(0).toUpperCase();
+                        tempSplit = tempCap + tempSplit.slice(1);
+                        finalSocial.push(tempSplit);
+                    }
+                }
             } else {
                 tempCatArr = [];
-            }
-            for (var k = 0; k < tempSocial.length; k++) {
-                console.log(tempSocial[k])
-                if (tempSocial[k].includes("http://")) {
-                    let tempSplit = tempSocial[k].replace("http://", '').replace(".com", '');
-                    console.log(tempSplit);
-                    let tempCap = tempSplit.charAt(0).toUpperCase();
-                    tempSplit = tempCap + tempSplit.slice(1);
-                    finalSocial.push(tempSplit);
-                } else {
-                    let tempSplit = tempSocial[k].replace("https://", '').replace(".com", '');
-                    let tempCap = tempSplit.charAt(0).toUpperCase();
-                    tempSplit = tempCap + tempSplit.slice(1);
-                    finalSocial.push(tempSplit);
-                }
             }
             this.setState({
                 urlArray: tempUrlArr,
@@ -163,7 +163,8 @@ class App extends Component {
             session: "",
             page: "Home",
             catArray: []
-        });
+        },
+        () => this.loadUrls());
     };
 
     // Switch to Home View component

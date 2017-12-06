@@ -18,14 +18,14 @@ class LinkBlock extends Component {
 
 	componentWillMount() {
 		let temp = this.props.urlname;
-		let tempComplete = "";
+		let firstLetter;
 		if (temp.includes("https://")) {
 			temp = temp.split("https://");
-			var firstLetter = temp[1].charAt(0).toUpperCase();
+			firstLetter = temp[1].charAt(0).toUpperCase();
 			temp = firstLetter + temp[1].slice(1)
 		} else if (temp.includes("http://")) {
 			temp = temp.split("http://");
-			var firstLetter = temp[1].charAt(0).toUpperCase();
+			firstLetter = temp[1].charAt(0).toUpperCase();
 			temp = firstLetter + temp[1].slice(1)
 		}
 		this.setState({
