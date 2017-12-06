@@ -1,47 +1,35 @@
 import axios from "axios";
 
+// Sends route request to route js files
 export default {
 	createUser: function(userData) {
-		console.log('before signup axios');
 		return axios.post("/api/user/create", userData);
 	},
 	loginUser: function(loginData) {
-		console.log('before login axios');
-		console.log(loginData);
 		return axios.put("/api/user/login", {
 			username: loginData.username,
 			password: loginData.password
 		});
 	},
 	addUrl: function(urlData) {
-		console.log('before axios add url');
-		console.log(urlData)
 		return axios.put("/api/user/addurl", urlData);
 	},
 	findUrls: function(urlData) {
-		console.log('before axios find urls');
-		console.log(urlData);
 		return axios.put("/api/user/find", urlData);
 	},
 	removeUrl: function(urlKey) {
-		console.log('before axios remove url');
-		console.log(urlKey);
 		return axios.put("/api/user/delete", urlKey);
 	},
 	addCat: function(catData) {
-		console.log(catData);
 		return axios.post("/api/user/addcat", catData);
 	},
 	removeCat: function(catData) {
-		console.log(catData);
 		return axios.put("/api/user/remcat", catData);
 	},
 	changeCat: function(urlData) {
-		console.log(urlData);
 		return axios.put("/api/user/chgcat", urlData);
 	},
 	defaultCat: function(urlData) {
-		console.log(urlData);
 		return axios.put("/api/user/defcat", urlData);
 	}
 }

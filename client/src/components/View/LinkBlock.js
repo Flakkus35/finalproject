@@ -16,6 +16,7 @@ class LinkBlock extends Component {
 		})
 	};
 
+	// chops given url to make it more presentable
 	componentWillMount() {
 		let temp = this.props.urlname;
 		let firstLetter;

@@ -3,6 +3,7 @@ import "./Sidebar.css";
 
 class Catlist extends Component {
 
+	// sends user to social-linked website
 	goToSocial = event => {
 		window.location.href(this.props.goto);
 	}

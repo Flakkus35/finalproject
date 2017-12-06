@@ -9,8 +9,6 @@ const userSchema = new Schema({
 		unique: true
 	},
 	password: String,
-	// Add keys to settings when a new setting is developed
-	// settings: {}
 	cat: Array,
 	links: [{ 
 		url: String, 
@@ -21,8 +19,7 @@ const userSchema = new Schema({
 	}]
 });
 
-// userSchema.plugin(passportLocalMongoose);
-
+// compares entered password to hashed password on login
 userSchema.methods.comparePassword = function comparePassword(password, cb) {
 	bcrypt.compare(password, this.password, function(err, isMatch) {
 		if (err) return cb(err);
@@ -30,6 +27,7 @@ userSchema.methods.comparePassword = function comparePassword(password, cb) {
 	});
 };
 
+// creates a hashed password for a new user
 userSchema.pre('save', function saveHook(next) {
 	const user = this;
 	if (!user.isModified('password')) return next();

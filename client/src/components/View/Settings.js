@@ -3,7 +3,6 @@ import { Col, Row } from "../Grid";
 import SettingsList from "./SettingsList";
 import "./View.css";
 import API from "../../util/API";
-/* global $ */
 
 class Settings extends Component {
 	state = {
@@ -24,23 +23,21 @@ class Settings extends Component {
 		if (this.props.urlkeys !== nextProps.urlkeys) {
 			this.setState({
 				urlArray: nextProps.urlkeys
-			},
-			() => console.log(this.state.urlArray));
+			});
 		}
 		if (this.props.cats !== nextProps.cats) {
 			this.setState({
 				catArray: nextProps.cats
-			},
-			() => console.log(this.state.catArray));
+			});
 		}
 		if (this.props.urlcats !== nextProps.urlcats) {
 			this.setState({
 				urlCatArray: nextProps.urlcats
-			},
-			() => console.log(this.state.urlCatArray));
+			});
 		}
 	};
 
+	// wipes state and text from input form
 	clearForm() {
 		this.setState({
 			urlInput: "",
@@ -48,6 +45,7 @@ class Settings extends Component {
 		});
 	}
 
+	// handles state and input change for text forms
 	handleInputChange = event => {
 		const { id, value } = event.target;
 	    this.setState({
@@ -55,12 +53,13 @@ class Settings extends Component {
 	    });
 	};
 
+	// handles creation event for adding a new link
 	handleFormSubmit = event => {
 		event.preventDefault();
+		// Checks if there is a value in form
 		if (this.state.urlInput) {
-			console.log(this.state.userKey);
-			console.log(this.state.urlOption);
 			let tempUrl;
+			// Checks if the value is in the proper format
 			if (this.state.urlInput.includes("http://") || this.state.urlInput.includes("https://")) {
 				if (this.state.urlInput.includes(".com")) {	
 					tempUrl = this.state.urlInput;
@@ -74,6 +73,7 @@ class Settings extends Component {
 					tempUrl = ("http://" + this.state.urlInput + ".com");
 				}
 			}
+			// Checks if the added value should be in the "Social" category
 			if (this.state.viewChoice === "3") {
 				API.addUrl({
 					session: this.state.userKey,
@@ -88,6 +88,7 @@ class Settings extends Component {
 					this.clearForm();
 					console.log(err)
 				});
+			// Adds to url list with the chosen category
 			} else {
 				API.addUrl({
 					session: this.state.userKey,
@@ -108,8 +109,10 @@ class Settings extends Component {
 		}
 	}
 
+	// handles creation event for a new category
 	handleCatSubmit = event => {
 		event.preventDefault();
+		// Checks if there is a value in the input form
 		if (this.state.catInput) {
 			API.addCat({
 				session: this.state.userKey,
@@ -123,11 +126,13 @@ class Settings extends Component {
 				this.clearForm();
 				console.log(err)
 			});
+		// error case when no input
 		} else {
 			return alert("Enter a new category first!");
 		}
 	}
 
+	// handles when the category is changed on the add url input form
 	switchCat = event => {
 		console.log(event.target.value);
 		if (this.state.catChoice !== event.target.value) {
@@ -138,74 +143,37 @@ class Settings extends Component {
 		}
 	}
 
-	makeWaypoint = (title) => {
-		console.log(title);
-	}
+	// makeWaypoint = (title) => {
+	// 	console.log(title);
+	// }
 
-	setChanges = urlObject => {
-		urlObject.forEach(object => {
-			if (object.isChanged) {
-				return this.setState({
-					changed: true,
-					changedUrls: urlObject
-				});
-			}
-		})
-	}
+	// placeholder() {
+	// 	<a 
+	// 		href="javascript:(function() {
+	// 			var d=document.createElement('script');
+	// 			d.src= 'https://code.jquery.com/jquery-3.2.1.min.js';
+	// 			d.onload = function() {
+	// 				$.ajax({
+	// 					url: 'http://localhost:3000/api/user/addurl',
+	// 					dataType: 'jsonp',
+	// 					data: {
+	// 						url: window.location.href
+	// 					},
+	// 					type: 'PUT',
+	// 					success: function(data) {
+	// 						console.log(data)
+	// 					}
+	// 				})
+	// 			};
+	// 			document.getElementsByTagName('head')[0].appendChild(d);
+	// 		}())"
+	// 		value={this.state.userKey}
+	// 	>
+	// 		Make Waypoint
+	// 	</a>
+	// };
 
-	testChange() {
-		if (this.state.changed) {
-			return (
-				<button 
-					className="btn btn-success" 
-					id="save-changes-btn" 
-					type="button"
-					onClick={this.saveChanges}
-				>
-					Save Changes
-				</button>
-			);
-		} else {
-			return ( <div /> );
-		}
-	}
-
-	saveChanges = event => {
-		event.preventDefault();
-		console.log(this.state.changedUrls);
-		this.state.changedUrls.forEach(object => {
-			if (object.isChanged) {
-				console.log('changed');
-			}
-		})
-	}
-
-	placeholder() {
-		<a 
-			href="javascript:(function() {
-				var d=document.createElement('script');
-				d.src= 'https://code.jquery.com/jquery-3.2.1.min.js';
-				d.onload = function() {
-					$.ajax({
-						url: 'http://localhost:3000/api/user/addurl',
-						dataType: 'jsonp',
-						data: {
-							url: window.location.href
-						},
-						type: 'PUT',
-						success: function(data) {
-							console.log(data)
-						}
-					})
-				};
-				document.getElementsByTagName('head')[0].appendChild(d);
-			}())"
-			value={this.state.userKey}
-		>
-			Make Waypoint
-		</a>
-	};
-
+	// handles switch event for tab buttons
 	switchView = event => {
 		if (this.state.viewChoice !== event.target.value) {
 			this.setState({
@@ -214,14 +182,7 @@ class Settings extends Component {
 		}
 	}
 
-	renderSocial = () => {
-
-	}
-
-	componentWillMount() {
-		console.log(this.props.socialUrls);
-	}
-
+	// renders the view based on the tab button choice
 	renderView = event => {
 		let btnChoice = this.state.viewChoice;
 		if (btnChoice === "1") {
@@ -258,7 +219,7 @@ class Settings extends Component {
 								<Col size="md-2">
 									<button 
 										type="button"
-										className="btn btn-primary"
+										className="btn btn-primary add-btn"
 										onClick={this.handleFormSubmit}
 									>
 									Add
@@ -295,11 +256,9 @@ class Settings extends Component {
 															userkey={this.props.user}
 															update={this.props.update}
 															fullUrls={this.props.fullUrls}
-															save={this.setChanges.bind(this)}
 														/>
 													))}
 												</ul>
-												{this.testChange()}
 											</div>
 										</div>
 									</div>
@@ -331,7 +290,7 @@ class Settings extends Component {
 								<Col size="md-2">
 									<button 
 										type="button"
-										className="btn btn-primary"
+										className="btn btn-primary add-btn"
 										onClick={this.handleCatSubmit}
 									>
 									Add
@@ -433,7 +392,6 @@ class Settings extends Component {
 														/>
 													))}
 												</ul>
-												{this.testChange()}
 											</div>
 										</div>
 									</div>

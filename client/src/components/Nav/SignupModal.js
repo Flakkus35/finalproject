@@ -9,6 +9,7 @@ class SignupModal extends Component {
 		confirmPassword: ""
 	};
 
+	// handles state and input changes for text boxes
 	handleInputChange = event => {
 		const { id, value } = event.target;
 	    this.setState({
@@ -16,6 +17,7 @@ class SignupModal extends Component {
 	    });
 	};
 
+	// Wipes state and text from input boxes
 	clearForm() {
 		this.setState({
 			usernameInput: "",
@@ -24,28 +26,30 @@ class SignupModal extends Component {
 		});
 	};
 
+	// focuses the modal on the username box when the modal opens
 	componentDidMount() {
 		$("#signup-modal").on("shown.bs.modal", function() {
 			$("#signupUser").trigger("focus");
 		});
 	};
 
+	// closes modal
 	closeModal() {
 		$("#signup-modal").modal("hide");
 	};
 
+	// handles new user submit
 	handleFormSubmit = event => {
 		event.preventDefault();
+		// Checks if there are entered values in username and password fields
 		if (this.state.signupUser && this.state.signupPassword) {
+			// Check if passwords match in password boxes/Used for error handling
 			if (this.state.signupPassword === this.state.confirmPassword) {
 				API.createUser({
 					username: this.state.signupUser,
 					password: this.state.signupPassword
 				})
 				.then(res => {
-					var test = [{ name: "TestName", url: "test.com"}, { name: "TestName2", url: "test2.com"}];
-					console.log(JSON.stringify(test));
-					console.log(res);
 					document.cookie = `username=${res.data.username}; path=/`;
 					document.cookie = `session=${res.data._id}; path=/`;
 					this.props.update();
@@ -57,11 +61,13 @@ class SignupModal extends Component {
 					this.clearForm();
 				});
 			} else {
+				// error case when passwords don't match
 				this.clearForm();
 				alert(`Passwords do not match`);
 				
 			}
 		} else {
+			// error case for when there isn't an entered value in username or password
 			this.clearForm();
 			alert(`Please enter both a username and password`);
 			

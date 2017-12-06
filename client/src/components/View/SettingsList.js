@@ -25,6 +25,7 @@ class SettingsList extends Component {
 		}
 	}
 
+	// handles deletion event of url on X button click
 	handleFormSubmit = event => {
 		event.preventDefault();
 		const urlkey = event.target.getAttribute("name");
@@ -41,6 +42,7 @@ class SettingsList extends Component {
 		});
 	};
 
+	// handles deletion event of category on X button click
 	handleCatSubmit = event => {
 		event.preventDefault();
 		API.removeCat({
@@ -48,6 +50,7 @@ class SettingsList extends Component {
 			cat: this.props.cat
 		})
 		.then(res => {
+			// Removes deleted category from all urls that had it and sets them to "None"
 			API.defaultCat({
 				session: this.props.userkey,
 				delCat: this.props.cat
@@ -58,6 +61,7 @@ class SettingsList extends Component {
 		.catch(err => console.log(err));
 	};
 
+	// handles when the category is changed on a url
 	switchCat = event => {
 		let chosenCat = event.target.parentNode.childNodes[2].value;
 		let chosenUrl = event.target.parentNode.childNodes[0].data;
@@ -72,13 +76,12 @@ class SettingsList extends Component {
 				}
 			} 
 		});
-		console.log(tempFullUrls);
 		API.changeCat({
 			userkey: this.props.userkey,
 			url_id: chosenUrlKey,
 			cat: chosenCat
 		})
-		.then(res => console.log(res))
+		.then(res => console.log('succeded'))
 		.catch(err => console.log(err));
 	}
 

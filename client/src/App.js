@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Nav from "./components/Nav";
 import "./App.css";
 import { Container, Row, Col } from "./components/Grid";
-import Sidebar from "./components/Sidebar/Sidebar";
+import { Sidebar } from "./components/Sidebar/Sidebar";
 import View from "./components/View/View";
 import LoginModal from "./components/Nav/LoginModal";
 import SignupModal from "./components/Nav/SignupModal";
@@ -37,12 +37,10 @@ class App extends Component {
 
     // Grab all urls from logged in user
     loadUrls() {
-        console.log(this.state.session);
         API.findUrls({
             session: this.state.session
         })
         .then(res => {
-            console.log(res);
             let tempUrlArr = [];
             let tempUrlKeyArr = [];
             let tempCatUrlArr = [];
@@ -51,15 +49,17 @@ class App extends Component {
             let tempSocial = [];
             let tempSocKey = [];
             let finalSocial = [];
-            console.log(res.data);
             if (res.data) {
                 for (var i = 0; i < res.data.links.length; i++) {
+                    // Since there is no "Settings" cat we need to run a check if the page is "Settings"
                     if (this.state.page === "Settings") {
+                        // Grabs all links that do not have the cat "Social"
                         if (res.data.links[i].cat !== "Social") {
                             tempUrlArr.push(res.data.links[i].url);
                             tempUrlKeyArr.push(res.data.links[i]._id);
                             tempCatUrlArr.push(res.data.links[i].cat);
                         }
+                    // If the page is not "Settings" grab only the links with cat of the page
                     } else if (res.data.links[i].cat === this.state.page) {
                         if (tempUrlArr.length < 8) {
                             tempUrlArr.push(res.data.links[i].url);
@@ -67,10 +67,12 @@ class App extends Component {
                             tempCatUrlArr.push(res.data.links[i].cat);
                         }
                     }
+                    // Store all social links in separate array
                     if (res.data.links[i].cat === "Social") {
                         tempSocial.push(res.data.links[i].url);
                         tempSocKey.push(res.data.links[i]._id);
                     }
+                    // Master object that holds all links w/cat info
                     tempUrlObj.push({
                         url: res.data.links[i].url,
                         url_id: res.data.links[i]._id,
@@ -78,14 +80,14 @@ class App extends Component {
                         isChanged: false
                     });
                 }
+                // Grab all data from the category array in db
                 for (var j = 0; j < res.data.cat.length; j++) {
                     tempCatArr.push(res.data.cat[j]);
                 }
+                // Checks if the urls are in the proper format
                 for (var k = 0; k < tempSocial.length; k++) {
-                    console.log(tempSocial[k])
                     if (tempSocial[k].includes("http://")) {
                         let tempSplit = tempSocial[k].replace("http://", '').replace(".com", '');
-                        console.log(tempSplit);
                         let tempCap = tempSplit.charAt(0).toUpperCase();
                         tempSplit = tempCap + tempSplit.slice(1);
                         finalSocial.push(tempSplit);
@@ -96,6 +98,7 @@ class App extends Component {
                         finalSocial.push(tempSplit);
                     }
                 }
+            // Sets the categories to none if not logged in
             } else {
                 tempCatArr = [];
             }
@@ -108,11 +111,6 @@ class App extends Component {
                 socialUrls: tempSocial,
                 urlSocKey: tempSocKey,
                 socNames: finalSocial
-            },
-            () => {
-                console.log(this.state.socialUrls);
-                console.log(this.state.urlSocKey);
-                console.log(this.state.socNames);
             });
         })
         .catch(err => console.log(err));
@@ -120,11 +118,8 @@ class App extends Component {
 
     // Updates App state and cookie with username
     updateUser() {
-        var temp = document.cookie;
-        console.log(temp);
         var updatedUser = this.getCookie("username");
         var updatedSession = this.getCookie("session");
-        // console.log(updatedUser);
         this.setState({
             user: updatedUser,
             session: updatedSession,
@@ -178,7 +173,6 @@ class App extends Component {
     // Change pages
     navigate = event => {
         const name = (event.target.getAttribute("value"));
-        console.log(name);
         if (this.state.page === name) {
             return console.log("Already at " + name);
         } else {

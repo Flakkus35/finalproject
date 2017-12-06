@@ -29,8 +29,9 @@
 }
 
 .group-card-header {
-	background: #dedede;
+	background: #dafbff;
 	font-size: 30px;
+	color: #000a8a;
 }
 
 .setting-link {

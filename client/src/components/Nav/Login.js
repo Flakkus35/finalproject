@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-// import facebook from "../../util/images/facebook_login.png";
-// import twitter from "../../util/images/twitter_login.png";
-// import google from "../../util/images/google_login.png";
 
 class Login extends Component {
 	state = {

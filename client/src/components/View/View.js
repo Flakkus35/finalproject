@@ -4,7 +4,7 @@ import { Container, Col, Row } from "../Grid";
 import LinkBlock from "./LinkBlock";
 import Settings from "./Settings";
 import notFound from "../../util/images/no-view-map.png";
-import Info from "./Info";
+import { Info } from "./Info";
 
 class View extends Component {
 	state = {
@@ -29,13 +29,13 @@ class View extends Component {
 				);
 			} else {
 				return (
-					<div>Login to start adding sites</div>
+					<div>Welcome to Cast Off!</div>
 				);
 			}
 		} else {
 			if (!this.props.userkey) {
 				return (
-					<div>Login to start adding sites</div>
+					<div>Welcome to Cast Off!</div>
 				);
 			} else {
 				return (
@@ -45,20 +45,27 @@ class View extends Component {
 		}
 	}
 
+	// Shown when there are no urls found
 	viewNone() {
+		// Shows if user is not logged in
 		if (!this.props.userkey) {
 			return (
 				<div>
-					<p>Login to start adding waypoints</p>
+					<p>Welcome to Cast Off, your one-stop site for navigation to 
+					your favorite sites! If this is your first time using Cast
+					Off make sure to check out the "Getting Started" page on
+					the sidebar. If you are a previous user just login to see 
+					all your sites.</p>
 				</div>
 			)
+		// Shows if user is logged in but has no links saved
 		} else {
 			return (
 				<div>
 					<p className="no-url-p">No waypoints charted yet!</p>
 					<img className="no-url-img" alt="No Urls" height="300" width="300" src={notFound} />
 				</div>
-			)
+			);
 		}
 	}
 
@@ -68,7 +75,6 @@ class View extends Component {
 	
 	// Returns chosen page
 	viewPage() {
-		console.log(this.state.page);
 		if (this.state.page === "Info") {
 			return (
 				<div className="card">

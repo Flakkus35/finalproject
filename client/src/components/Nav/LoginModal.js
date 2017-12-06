@@ -10,6 +10,7 @@ class LoginModal extends Component {
 		remember: false
 	};
 
+	// handles state and input changes for input boxes
 	handleInputChange = event => {
 		const { id, value } = event.target;
 	    this.setState({
@@ -17,6 +18,7 @@ class LoginModal extends Component {
 	    });
 	};
 
+	// wipes state and text from input form
 	clearForm() {
 		this.setState({
 			usernameInput: "",
@@ -24,37 +26,39 @@ class LoginModal extends Component {
 		});
 	}
 
+	// focuses modal on username input when modal is opened
 	componentDidMount() {
 		$("#login-modal").on("shown.bs.modal", function() {
 			$("#usernameInput").trigger("focus");
 		});
 	}
 
+	// closes modal
 	closeModal() {
 		$("#login-modal").modal("hide");
 	}
 
+	// handles login submit event
 	handleFormSubmit = event => {
 		event.preventDefault();
-		console.log(this.state.remember);
+		// Checks if both a username and password are entered
 		if (this.state.usernameInput && this.state.passwordInput) {
 			API.loginUser({
 				username: this.state.usernameInput,
 				password: this.state.passwordInput
 			})
 			.then(res => {
+				// Checks if "Remember Me" checkbox is checked
 				if (this.state.remember) {
 					let currentDate = new Date();
 					currentDate.setTime(currentDate.getTime() + (30*24*60*60*1000));
 					let expires = currentDate.toGMTString();
-					console.log(expires);
 					document.cookie = `username=${res.data.username}; expires=${expires}; path=/`;
 					document.cookie = `session=${res.data.password}; expires=${expires}; path=/`;
 				} else {
 					document.cookie = `username=${res.data.username}; path=/`;
 					document.cookie = `session=${res.data.password}; path=/`;
 				}
-				
 				this.props.update();
 				this.clearForm();
 				this.closeModal();
@@ -64,11 +68,13 @@ class LoginModal extends Component {
 				this.clearForm();
 			});
 		} else {
+			// error case if one of more required fields is empty
 			alert(`Please enter both a username and password`);
 			this.clearForm();
 		}
 	}
 
+	// handles state change of "Remember Me" checkbox
 	switchCheck = event => {
 		if (this.state.remember) {
 			this.setState({

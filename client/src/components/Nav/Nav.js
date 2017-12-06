@@ -18,6 +18,7 @@ class Nav extends Component {
     }
   }
 
+  // handles state change in search bar
   handleInputChange = event => {
     const { id, value } = event.target;
       this.setState({
