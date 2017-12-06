@@ -41,6 +41,7 @@ class App extends Component {
             session: this.state.session
         })
         .then(res => {
+            // sets temp variables to push into
             let tempUrlArr = [];
             let tempUrlKeyArr = [];
             let tempCatUrlArr = [];
