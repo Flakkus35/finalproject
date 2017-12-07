@@ -20,8 +20,8 @@ class SignupModal extends Component {
 	// Wipes state and text from input boxes
 	clearForm() {
 		this.setState({
-			usernameInput: "",
-			passwordInput: "",
+			signupUser: "",
+			signupPassword: "",
 			confirmPassword: ""
 		});
 	};
@@ -50,11 +50,17 @@ class SignupModal extends Component {
 					password: this.state.signupPassword
 				})
 				.then(res => {
-					document.cookie = `username=${res.data.username}; path=/`;
-					document.cookie = `session=${res.data._id}; path=/`;
-					this.props.update();
-					this.clearForm();
-					this.closeModal();
+					if (!res.data.username) {
+						alert("User already exists");
+						this.clearForm();
+						return;
+					} else {
+						document.cookie = `username=${res.data.username}; path=/`;
+						document.cookie = `session=${res.data._id}; path=/`;
+						this.props.update();
+						this.clearForm();
+						this.closeModal();
+					}
 				})
 				.catch(err => {
 					console.log(err);
