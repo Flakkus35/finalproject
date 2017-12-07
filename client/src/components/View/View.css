@@ -12,6 +12,16 @@
 .add-btn {
 	background: #000a8a;
 	width: 8rem;
+	color: white;
+}
+
+.add-btn:hover {
+	background: #2c36b9;
+	color: white;
+}
+
+.add-btn:focus {
+	color: white;
 }
 
 .view-header {

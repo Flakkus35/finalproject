@@ -147,31 +147,31 @@ class Settings extends Component {
 	// 	console.log(title);
 	// }
 
-	// placeholder() {
-	// 	<a 
-	// 		href="javascript:(function() {
-	// 			var d=document.createElement('script');
-	// 			d.src= 'https://code.jquery.com/jquery-3.2.1.min.js';
-	// 			d.onload = function() {
-	// 				$.ajax({
-	// 					url: 'http://localhost:3000/api/user/addurl',
-	// 					dataType: 'jsonp',
-	// 					data: {
-	// 						url: window.location.href
-	// 					},
-	// 					type: 'PUT',
-	// 					success: function(data) {
-	// 						console.log(data)
-	// 					}
-	// 				})
-	// 			};
-	// 			document.getElementsByTagName('head')[0].appendChild(d);
-	// 		}())"
-	// 		value={this.state.userKey}
-	// 	>
-	// 		Make Waypoint
-	// 	</a>
-	// };
+	placeholder() {
+		<a 
+			href="javascript:(function() {
+				var d=document.createElement('script');
+				d.src= 'https://code.jquery.com/jquery-3.2.1.min.js';
+				d.onload = function() {
+					$.ajax({
+						url: 'http://localhost:3000/api/user/addurl',
+						dataType: 'jsonp',
+						data: {
+							url: window.location.href
+						},
+						type: 'PUT',
+						success: function(data) {
+							console.log(data)
+						}
+					})
+				};
+				document.getElementsByTagName('head')[0].appendChild(d);
+			}())"
+			value={this.state.userKey}
+		>
+			Make Waypoint
+		</a>
+	};
 
 	// handles switch event for tab buttons
 	switchView = event => {
@@ -181,6 +181,29 @@ class Settings extends Component {
 			});
 		}
 	}
+	
+	// function for returning a bookmarklet link
+	test = event => {
+		return `javascript:(function() {
+							var d=document.createElement('script');
+							d.src= 'https://code.jquery.com/jquery-3.2.1.min.js';
+							d.onload = function() {
+								$.ajax({
+									url: 'http://localhost:3000/api/user/addurl',
+									dataType: 'json',
+									data: {
+										session:'${this.props.user}',
+										url: window.location.href
+									},
+									type: 'PUT',
+									success: function(data) {
+										console.log(data)
+									}
+								})
+							};
+							document.getElementsByTagName('head')[0].appendChild(d);
+						}())`;
+	}
 
 	// renders the view based on the tab button choice
 	renderView = event => {
@@ -188,7 +211,12 @@ class Settings extends Component {
 		if (btnChoice === "1") {
 			return (
 				<div id="settings-list">
-					<div id="add-url">	
+					<div id="add-url">
+					<a 
+						href={this.test()}
+					>
+						Make Waypoint
+					</a>
 						<h4 className="setting-title">Add New Waypoint</h4>
 						<Row>
 							<form className="form-group">
@@ -219,7 +247,7 @@ class Settings extends Component {
 								<Col size="md-2">
 									<button 
 										type="button"
-										className="btn btn-primary add-btn"
+										className="btn add-btn"
 										onClick={this.handleFormSubmit}
 									>
 									Add
@@ -290,7 +318,7 @@ class Settings extends Component {
 								<Col size="md-2">
 									<button 
 										type="button"
-										className="btn btn-primary add-btn"
+										className="btn add-btn"
 										onClick={this.handleCatSubmit}
 									>
 									Add
@@ -354,7 +382,7 @@ class Settings extends Component {
 								<Col size="md-2">
 									<button 
 										type="button"
-										className="btn btn-primary"
+										className="btn add-btn"
 										onClick={this.handleFormSubmit}
 									>
 									Add
