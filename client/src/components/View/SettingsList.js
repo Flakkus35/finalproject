@@ -81,7 +81,7 @@ class SettingsList extends Component {
 			url_id: chosenUrlKey,
 			cat: chosenCat
 		})
-		.then(res => console.log('succeded'))
+		.then(res => console.log('succeeded'))
 		.catch(err => console.log(err));
 	}
 

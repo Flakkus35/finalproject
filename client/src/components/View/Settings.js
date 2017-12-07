@@ -143,36 +143,6 @@ class Settings extends Component {
 		}
 	}
 
-	// makeWaypoint = (title) => {
-	// 	console.log(title);
-	// }
-
-	placeholder() {
-		<a 
-			href="javascript:(function() {
-				var d=document.createElement('script');
-				d.src= 'https://code.jquery.com/jquery-3.2.1.min.js';
-				d.onload = function() {
-					$.ajax({
-						url: 'http://localhost:3000/api/user/addurl',
-						dataType: 'jsonp',
-						data: {
-							url: window.location.href
-						},
-						type: 'PUT',
-						success: function(data) {
-							console.log(data)
-						}
-					})
-				};
-				document.getElementsByTagName('head')[0].appendChild(d);
-			}())"
-			value={this.state.userKey}
-		>
-			Make Waypoint
-		</a>
-	};
-
 	// handles switch event for tab buttons
 	switchView = event => {
 		if (this.state.viewChoice !== event.target.value) {
@@ -180,29 +150,6 @@ class Settings extends Component {
 				viewChoice: event.target.value
 			});
 		}
-	}
-	
-	// function for returning a bookmarklet link
-	test = event => {
-		return `javascript:(function() {
-							var d=document.createElement('script');
-							d.src= 'https://code.jquery.com/jquery-3.2.1.min.js';
-							d.onload = function() {
-								$.ajax({
-									url: 'http://localhost:3000/api/user/addurl',
-									dataType: 'json',
-									data: {
-										session:'${this.props.user}',
-										url: window.location.href
-									},
-									type: 'PUT',
-									success: function(data) {
-										console.log(data)
-									}
-								})
-							};
-							document.getElementsByTagName('head')[0].appendChild(d);
-						}())`;
 	}
 
 	// renders the view based on the tab button choice
@@ -212,11 +159,6 @@ class Settings extends Component {
 			return (
 				<div id="settings-list">
 					<div id="add-url">
-					<a 
-						href={this.test()}
-					>
-						Make Waypoint
-					</a>
 						<h4 className="setting-title">Add New Waypoint</h4>
 						<Row>
 							<form className="form-group">

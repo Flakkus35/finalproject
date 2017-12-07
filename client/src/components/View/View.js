@@ -4,7 +4,7 @@ import { Container, Col, Row } from "../Grid";
 import LinkBlock from "./LinkBlock";
 import Settings from "./Settings";
 import notFound from "../../util/images/no-view-map.png";
-import { Info } from "./Info";
+import Info from "./Info";
 
 class View extends Component {
 	state = {
@@ -82,7 +82,7 @@ class View extends Component {
 						<Row>
 							<Col size="md-12">
 								<div className="info-view">
-									<Info />
+									<Info user={this.props.userkey}/>
 								</div>
 							</Col>
 						</Row>
