@@ -19,3 +19,7 @@ In each case you use an addon/extension make sure to follow their instructions o
 ## Using Cast Off Bookmarklet
 
 Included in Cast Off is the option to add a bookmarklet that, when clicked on any page out of Cast Off, will add it to your list of links! Setting up the bookmarklet could not be simpler. First, create a new user or login to an existing account. Then just click and drag the link shown in the Info page into your bookmarks panel below the url panel and you are done! Your bookmarklet is now ready to use. Refresh or open up a new instance of Cast Off to see your new link. New links are set with a plan of "None" so be sure to set them to a proper plan to see them in action.
+
+(/client/src/util/images/castoff-1.png)
+
+(/client/src/util/images/castoff-2.png)
