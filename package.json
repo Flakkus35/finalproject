@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "homepage": "https://warm-reef-75717.herokuapp.com/",
   "scripts": {
     "server": "node server.js",
     "client": "node scripts/start-client.js",
