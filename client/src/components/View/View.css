@@ -283,3 +283,16 @@
 	margin-right: 20px;
 }
 
+@media only screen and (max-width: 768px) {
+	#main-view {
+		width: 45rem;
+		margin-right: 0px;
+		float: right;
+		height: 90rem;
+	}
+}
+
+@media only screen and (max-width: 380px) {
+	
+}
+

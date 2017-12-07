@@ -148,3 +148,9 @@
 	z-index: 50;
 	float: right;
 }
+
+@media only screen and (max-width: 768px) {
+	.google-search {
+		display: none;
+	}
+}

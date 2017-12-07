@@ -66,6 +66,7 @@ class LoginModal extends Component {
 			})
 			.catch(err => {
 				console.log(err);
+				alert("No user found");
 				this.clearForm();
 			});
 		} else {

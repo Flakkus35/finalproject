@@ -50,7 +50,7 @@ class Nav extends Component {
               />
         		  <div className="google-search navbar-form navbar-right">
                 <div className="form-group">
-                  <form method="get" action="http://www.google.com/search">
+                  <form method="get" action="https://www.google.com/search">
                     <table>
                       <tbody>
                         <tr>

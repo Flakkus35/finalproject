@@ -148,7 +148,9 @@ class View extends Component {
 							</div>
 						</Col>
 					</Row>
-					{this.viewPage()}
+					<div className="container-fluid">
+						{this.viewPage()}
+					</div>
 				</Container>
 			</div>
 		);
