@@ -56,7 +56,7 @@ class SignupModal extends Component {
 						return;
 					} else {
 						document.cookie = `username=${res.data.username}; path=/`;
-						document.cookie = `session=${res.data._id}; path=/`;
+						document.cookie = `session=${res.data.password}; path=/`;
 						this.props.update();
 						this.clearForm();
 						this.closeModal();

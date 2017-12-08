@@ -50,6 +50,7 @@ class App extends Component {
             let tempSocial = [];
             let tempSocKey = [];
             let finalSocial = [];
+            console.log(res);
             if (res.data) {
                 for (var i = 0; i < res.data.links.length; i++) {
                     // Since there is no "Settings" cat we need to run a check if the page is "Settings"
